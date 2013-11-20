@@ -10,6 +10,23 @@
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
     /**
+     * Inicia as rotas customizadas da aplicação.
+     * 
+     * @return void
+     */
+    protected function _initRoutes() {
+        $front = Zend_Controller_Front::getInstance();
+        // $front->registerPlugin(new Application_Plugin_RotasPlugin());
+        // $this->bootstrap('frontController');
+
+    $config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/routes.ini', 'routes');
+
+    $router = $front->getRouter()->addConfig($config, 'routes');
+
+    return $router;
+    }
+
+    /**
      * Instancia e registra os plugins utilizados pela aplicação.
      * 
      * @return void
@@ -18,7 +35,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $front = Zend_Controller_Front::getInstance();
         $front->registerPlugin(new Application_Plugin_LayoutPlugin());
         $front->registerPlugin(new Application_Plugin_AutenticacaoPlugin());
-
     }
 
     /**
