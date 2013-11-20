@@ -1,0 +1,67 @@
+<form class="ui form segment">
+    <?php 
+    $elements = $this->element->getElements();
+    $groups = array();
+    foreach($elements as $element) {
+        $groups[(int) $element->getAttrib('group')][] = $element;
+    }
+
+    foreach($groups as $group) {
+        echo count($group);
+        echo "<br>";
+    }
+    exit;
+
+    foreach ($elements as $element) {
+        echo $type = strtolower(str_replace('Zend_Form_Element_', '', $element->getType()));
+        $attr = $element->getAttribs();
+        $label = $element->getLabel();
+        $value = $element->getValue();
+        $required = $element->isRequired();
+        $group = $attr['group'];
+        // echo '<pre>';
+        // print_r(get_class_methods($element));
+        // exit;
+        ?>
+        <div class="">
+            <div class="field">
+                <?php
+                switch($type) {
+                    case 'text': // Zend_Form_Element_Text
+                    case 'password': // Zend_Form_Element_Password 
+                    ?>
+                    <label><?php echo $label ?></label>
+                    <?php if((strlen($attr['icon']) > 0) || $required) {
+                        $icon_position = strlen($attr['icon_position']) > 0 ? ' ' . $attr['icon_position'] : ' left';
+                        $icon = strlen($attr['icon']) > 0 ? ' icon' : '';
+                        $labeled = $required ? ' labeled' : '';
+                        ?>
+                        <div class="ui<?php echo $icon_position . $labeled . $icon ?> input">
+                    <?php } ?>
+                    
+                    <input type="<?php echo $type ?>"<?php echo $attribs ?> value="<?php echo $value ?>">
+                    
+                    <?php if((strlen($attr['icon']) > 0) || $required) { ?>
+                        <?php if(strlen($attr['icon']) > 0) { ?>
+                            <i class="<?php echo $attr['icon'] ?> icon"></i>
+                        <?php }
+
+                        if($required) { ?>
+                        <div class="ui corner label">
+                            <i class="icon asterisk"></i>
+                        </div>
+                        <?php } ?>
+                        </div>
+                    <?php } ?>
+
+                    <?php
+                    break;
+                    case 'submit': // Zend_Form_Element_Submit ?>
+                    <?php
+                    break;
+                }
+                ?>
+            </div>
+        </div>
+    <?php } ?>
+</form>

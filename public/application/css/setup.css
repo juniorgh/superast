@@ -1,0 +1,22 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    margin: 0;
+    padding: 0;
+}
+
+.ui.buttons .button,
+.ui.button,
+.ui.menu .item {
+    font-size: 15px;
+}
+
+#app_navigation {
+    margin-bottom: 10px;
+}
+
+.ui.vertical.menu.sidebar > .item:first-child,
+#app_navigation .ui.menu {
+    border-radius: 0;
+}
+

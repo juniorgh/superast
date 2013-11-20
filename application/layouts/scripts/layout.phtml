@@ -1,0 +1,23 @@
+<?php echo $this->doctype() ?>
+<html>
+<head>
+    <?php echo $this->headTitle() ?>
+    <!-- Exibindo as meta tags -->
+    <meta charset="<?php echo $this->getEncoding() ?>">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="<?php echo $this->baseUrl('/'); ?>">
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700' rel='stylesheet' type='text/css'>
+    <?php echo $this->headLink() ?>
+</head>
+<body>
+    <?php echo $this->partial('partials/navigation.phtml', array("menu" => $this->menus)) ?>
+
+    <div class="ui six column divided grid">
+        <?php echo $this->layout()->content; ?>
+    </div>
+
+    <?php echo $this->partial('partials/sidebar.phtml', array("menu", $this->menus)) ?>
+    <?php echo $this->headScript(); ?>
+</body>
+</html>

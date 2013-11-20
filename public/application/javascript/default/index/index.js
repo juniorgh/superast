@@ -1,0 +1,1 @@
+// javascript source for action index from default module
