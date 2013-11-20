@@ -1,0 +1,3 @@
+# Configurações para Apache
+
+Alias /superast /var/www/superast/var/www/public/

@@ -9,21 +9,15 @@
  */
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
-    protected function _initView() {
-    }
-
     /**
      * Instancia e registra os plugins utilizados pela aplicação.
      * 
      * @return void
      */
     protected function _initPlugins() {
-        $layout = new Application_Plugin_LayoutPlugin();
-        $autenticacao = new Application_Plugin_AutenticacaoPlugin();
-
         $front = Zend_Controller_Front::getInstance();
-        $front->registerPlugin($layout);
-        $front->registerPlugin($autenticacao);
+        $front->registerPlugin(new Application_Plugin_LayoutPlugin());
+        $front->registerPlugin(new Application_Plugin_AutenticacaoPlugin());
 
     }
 
