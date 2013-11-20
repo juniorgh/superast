@@ -60,7 +60,7 @@ class Application_Plugin_LayoutPlugin extends Zend_Controller_Plugin_Abstract {
         $config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/application.ini', APPLICATION_ENV);
         $javascriptPath = $config->frontend->assets->javascriptPath;
 
-        $public_path = APPLICATION_PATH . '/../public/';
+        $public_path = realpath(APPLICATION_PATH . '/../public/') . '/';
 
         $mvc = array($request->getModuleName(), $request->getControllerName(), $request->getActionName() . '.js');
         $actionjs = '../../application/javascript/' . implode('/', $mvc);
@@ -68,13 +68,11 @@ class Application_Plugin_LayoutPlugin extends Zend_Controller_Plugin_Abstract {
         $scripts = array("jquery-2.0.3.min.js", "semantic.min.js", '../../application/javascript/setup.js', $actionjs);
 
         foreach($scripts as $file) {
-            $filename = $javascriptPath . $file;
+            $filename = realpath($javascriptPath . $file);
             if(file_exists($filename)) {
                 $view->headScript()->appendFile(str_replace($public_path, '', $filename));
             }
         }
-        
-        // $view->headScript()->appendFile('../application/javascript/setup.js');
 
         $cssPath = $config->frontend->assets->cssPath;
         $styles = array(
@@ -87,11 +85,9 @@ class Application_Plugin_LayoutPlugin extends Zend_Controller_Plugin_Abstract {
                 "media" => "all"
             )
         );
-
-        // $view->headLink()->appendStylesheet("http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700");
         
         foreach($styles as $file) {
-            $filename = $cssPath . $file["href"];
+            $filename = realpath($cssPath . $file["href"]);
             if(file_exists($filename)) {
                 $view->headLink()->appendStylesheet(str_replace($public_path, '', $filename), $file["media"]);
             }
