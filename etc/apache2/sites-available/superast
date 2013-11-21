@@ -1,3 +1,19 @@
 # Configurações para Apache
 
 Alias /superast /var/www/superast/var/www/public/
+
+<VirtualHost *:80>
+   DocumentRoot "/var/www/superast/var/www/public/"
+   ServerName localhost
+
+   # This should be omitted in the production environment
+   SetEnv APPLICATION_ENV development
+    
+   <Directory "/var/www/superast/var/www/public/">
+       Options Indexes MultiViews FollowSymLinks
+       AllowOverride All
+       Order allow,deny
+       Allow from all
+   </Directory>
+    
+</VirtualHost>
