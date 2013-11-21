@@ -65,7 +65,10 @@ class Application_Plugin_LayoutPlugin extends Zend_Controller_Plugin_Abstract {
         $mvc = array($request->getModuleName(), $request->getControllerName(), $request->getActionName() . '.js');
         $actionjs = '../../application/javascript/' . implode('/', $mvc);
 
-        $scripts = array("jquery-2.0.3.min.js", "semantic.min.js", '../../application/javascript/setup.js', $actionjs);
+        $scripts = array("jquery-2.0.3.min.js", "semantic.min.js", '../../application/javascript/setup.js');
+        $scripts[] = '../../application/vendor/jqplot/jquery.jqplot.min.js';
+        $scripts[] = '../../application/vendor/jqplot/plugins/jqplot.pieRenderer.min.js';
+        $scripts[] = $actionjs;
 
         foreach($scripts as $file) {
             $filename = realpath($javascriptPath . $file);
@@ -82,6 +85,10 @@ class Application_Plugin_LayoutPlugin extends Zend_Controller_Plugin_Abstract {
             ),
             array(
                 "href" => "../../application/css/setup.css",
+                "media" => "all"
+            ),
+            array(
+                "href" => '../../application/vendor/jqplot/jquery.jqplot.min.css',
                 "media" => "all"
             )
         );
