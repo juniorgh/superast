@@ -18,12 +18,7 @@ class Telephony_ServersController extends Zend_Controller_Action
         // action body
     }
 
-    public function editAction()
-    {
-        // action body
-    }
-
-    public function addAction()
+    public function saveAction()
     {
         // action body
     }
@@ -33,8 +28,15 @@ class Telephony_ServersController extends Zend_Controller_Action
         // action body
     }
 
+    public function formAction()
+    {
+        // action body
+    }
+
 
 }
+
+
 
 
 

@@ -1,3 +1,111 @@
-<center>
-    View script for controller <b>Servers</b> and script/action name <b>index</b>
-</center>
+<?php echo $this->partial('header.phtml'); ?>
+
+<div class="ui fluid form segment transition hidden" id="table_filter">
+    <div class="two fields">
+        <div class="field">
+            <label>Hostname</label>
+            <input type="text">
+        </div>
+        <div class="field">
+            <label>IP</label>
+            <input type="text">
+        </div>
+    </div>
+    <div class="two fields">
+        <div class="field">
+            <label>Usuário MySQL</label>
+            <input placeholder="Usuário do banco de dados" type="text">
+        </div>
+        <div class="field">
+            <label>Usuário AMI</label>
+            <input placeholder="Usuário do Asterisk Manager Interface" type="text">
+        </div>
+    </div>
+    <div class="field">
+        <div class="ui selection dropdown">
+            <input type="hidden" name="gender">
+            <div class="default text">Elastix?</div>
+            <i class="dropdown icon"></i>
+            <div class="menu">
+                <div class="item" data-value="1">Sim</div>
+                <div class="item" data-value="0">Não</div>
+            </div>
+        </div>
+    </div>
+    <div class="ui green labeled icon button">
+        <i class="filter icon"></i> Filtrar
+    </div>
+    <div class="ui red labeled icon button">
+        <i class="trash icon"></i> Limpar
+    </div>
+</div>
+
+<a href="<?php echo $this->activeAddAction ?>" class="ui orange labeled icon button">
+    <i class="add icon"></i> Novo servidor
+</a>
+
+<div class="ui orange labeled icon button" data-toggle="filter" data-target="#table_filter" data-placement="slide down">
+    <i class="filter icon"></i> Filtros
+</div>
+
+<table class="ui table padded segment">
+    <thead>
+        <tr>
+            <th>Hostname</th>
+            <th>IP</th>
+            <th>Usuário MySQL</th>
+            <th>Usuário AMI</th>
+            <th>Elastix?</th>
+            <th class="cell action">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>callcenter</td>
+            <td>10.0.0.18</td>
+            <td>root</td>
+            <td>admin</td>
+            <td>Sim</td>
+            <td class="cell action">
+                <div class="ui icon small blue button haspopup" data-content="Editar">
+                    <i class="edit icon"></i>
+                </div>
+                <div class="ui icon small red button haspopup" data-content="Excluir">
+                    <i class="remove icon"></i>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>zincornio</td>
+            <td>10.0.0.132</td>
+            <td>root</td>
+            <td>admin</td>
+            <td>Sim</td>
+            <td class="cell action">
+                <div class="ui icon small blue button haspopup" data-content="Editar">
+                    <i class="edit icon"></i>
+                </div>
+                <div class="ui icon small red button haspopup" data-content="Excluir">
+                    <i class="remove icon"></i>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>voip</td>
+            <td>10.0.0.1</td>
+            <td>root</td>
+            <td>admin</td>
+            <td>Sim</td>
+            <td class="cell action">
+                <div class="ui icon small blue button haspopup" data-content="Editar">
+                    <i class="edit icon"></i>
+                </div>
+                <div class="ui icon small red button haspopup" data-content="Excluir">
+                    <i class="remove icon"></i>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<?php echo $this->partial('pagination.phtml'); ?>

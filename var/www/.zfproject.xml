@@ -73,6 +73,7 @@
               <actionMethod actionName="edit"/>
               <actionMethod actionName="add"/>
               <actionMethod actionName="drop"/>
+              <actionMethod actionName="form"/>
             </controllerFile>
             <controllerFile controllerName="Extensions">
               <actionMethod actionName="index"/>
@@ -124,6 +125,9 @@
               </viewControllerScriptsDirectory>
               <viewControllerScriptsDirectory forControllerName="Servers">
                 <viewScriptFile forActionName="drop"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Servers">
+                <viewScriptFile forActionName="form"/>
               </viewControllerScriptsDirectory>
             </viewScriptsDirectory>
             <viewHelpersDirectory/>

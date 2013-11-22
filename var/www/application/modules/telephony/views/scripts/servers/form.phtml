@@ -1,0 +1,59 @@
+<?php echo $this->partial('header.phtml') ?>
+
+<form action="<?php echo $this->activeSaveAction ?>" method="post" id="">
+    <div class="ui fluid form segment error" id="table_filter">
+        <div class="ui error message">
+            <div class="header">Dados inválidos</div>
+            <p>Por favor, preencha corretamente os campos abaixo destacados e submeta o formulário novamente.</p>
+        </div>
+        <div class="two fields">
+            <div class="field error">
+                <label for="server_hostname">Hostname</label>
+                <input id="server_hostname" name="server_hostname" value="<?php $this->formdata["server_hostname"]?>" placeholder="Hostname da máquina" type="text">
+                <div class="ui red pointing above ui label">Insira o Hostname da máquina</div>
+            </div>
+            <div class="field">
+                <label for="server_ip_address">IP</label>
+                <input id="server_ip_address" name="server_ip_address" value="<?php $this->formdata["server_ip_address"]?>" placeholder="Endereço de IP da interface principal" type="text">
+            </div>
+        </div>
+        <div class="two fields">
+            <div class="field">
+                <label for="server_database_user">Usuário MySQL</label>
+                <input id="server_database_user" name="server_database_user" value="<?php $this->formdata["server_database_user"]?>" placeholder="Usuário do banco de dados" type="text">
+            </div>
+            <div class="field">
+                <label for="server_database_password">Senha MySQL</label>
+                <input id="server_database_password" name="server_database_password" value="<?php $this->formdata["server_database_password"]?>" placeholder="Senha do banco de dados" type="password">
+            </div>
+        </div>
+        <div class="two fields">
+            <div class="field">
+                <label for="server_ami_user">Usuário AMI</label>
+                <input id="server_ami_user" name="server_ami_user" value="<?php $this->formdata["server_ami_user"]?>" placeholder="Usuário do Asterisk Manager Interface" type="text">
+            </div>
+            <div class="field">
+                <label for="server_ami_secret">Senha AMI</label>
+                <input id="server_ami_secret" name="server_ami_secret" value="<?php $this->formdata["server_ami_secret"]?>" placeholder="Senha do Asterisk Manager Interface" type="password">
+            </div>
+        </div>
+        <div class="field">
+            <label for="server_is_elastix">Elastix?</label>
+            <div class="ui selection dropdown">
+                <input type="hidden" name="server_is_elastix" id="server_is_elastix" value="1">
+                <div class="default text">Sim</div>
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                    <div class="item" data-value="1">Sim</div>
+                    <div class="item" data-value="0">Não</div>
+                </div>
+            </div>
+        </div>
+        <div class="ui green labeled icon button" data-submit>
+            <i class="save icon"></i> Salvar
+        </div>
+        <a href="<?php echo $this->activeIndexAction ?>" class="ui red labeled icon button">
+            <i class="reply mail icon"></i> Cancelar
+        </a>
+    </div>
+</form>
