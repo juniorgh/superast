@@ -53,7 +53,6 @@ class Application_Plugin_LayoutPlugin extends Zend_Controller_Plugin_Abstract {
     public function preDispatch(Zend_Controller_Request_Abstract $request) {
         $layout = Zend_Layout::getMvcInstance();
         $view = $layout->getView();
-        $view->addScriptPath(APPLICATION_PATH . '/layouts/partials');
         $view->doctype('HTML5');
         $view->setEncoding('utf-8');
 
