@@ -1,6 +1,6 @@
 # Configurações para Apache
 
-Alias /superast /var/www/superast/var/www/public/
+# Alias /superast /var/www/superast/var/www/public/
 
 <VirtualHost *:80>
    DocumentRoot "/var/www/superast/var/www/public/"

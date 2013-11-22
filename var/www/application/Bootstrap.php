@@ -16,14 +16,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
      */
     protected function _initRoutes() {
         $front = Zend_Controller_Front::getInstance();
-        // $front->registerPlugin(new Application_Plugin_RotasPlugin());
-        // $this->bootstrap('frontController');
-
-    $config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/routes.ini', 'routes');
-
-    $router = $front->getRouter()->addConfig($config, 'routes');
-
-    return $router;
+        $config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/routes.ini', 'routes');
+        $router = $front->getRouter()->addConfig($config, 'routes');
+        return $router;
     }
 
     /**
@@ -43,17 +38,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
      * @return void
      */
     protected function _initAutoload() {
-        $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
-            'basePath'      => APPLICATION_PATH,
-            'namespace'     => 'Application',
-            'resourceTypes' => array(
-                'decorator' => array(
-                    'path'      => 'decorators/',
-                    'namespace' => 'Decorator',
-                )
-            ),
-        ));
-
         $autoloader = new Zend_Application_Module_Autoloader(array(
             'basePath' => APPLICATION_PATH.'/modules/default/',
             'namespace' => 'Default'
