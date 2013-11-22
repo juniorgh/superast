@@ -1,5 +1,6 @@
 
 $(document).ready(function() {
+    $('body').transition('fade');
     /** 
      * Alterna a visualização das sidebar's
      */
@@ -25,4 +26,31 @@ $(document).ready(function() {
     $('.ui.dropdown').dropdown({
         debug: false
     });
+
+    $('[data-toggle="filter"]').click(function() {
+        var target, placement;
+
+        target = $(this).attr('data-target') || $(this).attr('href');
+        placement = $(this).attr('data-placement') || 'slide up';
+
+        $(target).transition(placement);
+    });
+
+    $('.haspopup').popup({
+        debug: false
+    });
+
+    $('[data-submit]').click(function(e) {
+        e.preventDefault();
+        var form;
+
+        form = $(this);
+
+        while(!form.is('form')) {
+            form = form.parent();
+        }
+
+        form.submit();
+    });
+
 });

@@ -21,7 +21,7 @@ body {
 }
 
 #app_wrapper {
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 #app_wrapper .column {
@@ -35,4 +35,21 @@ body {
 #app_wrapper .column.chart.description {
     padding-top: 15px;
     overflow: hidden;
+}
+
+#app_wrapper .ui.divider.title-content {
+    margin: 30px 0;
+}
+
+.cell.action {
+    text-align: center !important;
+    width: 15%;
+}
+
+#app_wrapper #paginator > div {
+    float: left;
+}
+
+#app_wrapper #paginator > div:last-child {
+    float: right;
 }

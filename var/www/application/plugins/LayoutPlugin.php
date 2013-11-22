@@ -54,7 +54,13 @@ class Application_Plugin_LayoutPlugin extends Zend_Controller_Plugin_Abstract {
         $layout = Zend_Layout::getMvcInstance();
         $view = $layout->getView();
         $view->doctype('HTML5');
-        $view->setEncoding('utf-8');
+        $view->headMeta()->setCharset('utf-8')
+        ->appendHttpEquiv('X-UA-Compatible', 'IE=edge,chrome=1')
+        ->appendHttpEquiv('viewport', 'width=device-width, initial-scale=1.0');
+
+        $view->headTitle($request->getControllerName())
+        ->headTitle($request->getActionName())
+        ->setSeparator(' - ');
 
         $config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/application.ini', APPLICATION_ENV);
         $javascriptPath = $config->frontend->assets->javascriptPath;
@@ -99,6 +105,17 @@ class Application_Plugin_LayoutPlugin extends Zend_Controller_Plugin_Abstract {
             }
         }
 
+        $activeIndexAction = $view->url(array('module' => $request->getModuleName(), 'controller' => $request->getControllerName(), 'action' => 'index'), 'index_action', true);
+        $activeAddAction = $view->url(array('module' => $request->getModuleName(), 'controller' => $request->getControllerName(), 'action' => 'add'), 'add_action', true);
+        $activeSaveAction = $view->url(array('module' => $request->getModuleName(), 'controller' => $request->getControllerName(), 'action' => 'save'), 'save_action', true);
+
+        $view->assign('activeIndexAction', $activeIndexAction);
+        $view->assign('activeAddAction', $activeAddAction);
+        $view->assign('activeSaveAction', $activeSaveAction);
+
+        $view->assign('moduleName', $request->getModuleName());
+        $view->assign('controllerName', $request->getControllerName());
+        $view->assign('actionName', $request->getActionName());
     }
  
     /**
