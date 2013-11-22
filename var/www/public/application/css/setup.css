@@ -20,3 +20,19 @@ body {
     border-radius: 0;
 }
 
+#app_wrapper {
+    margin-top: 20px;
+}
+
+#app_wrapper .column {
+    font-size: 15px;
+}
+
+#app_wrapper .ui.vertically.divided.grid {
+    padding: 0 20px;
+}
+
+#app_wrapper .column.chart.description {
+    padding-top: 15px;
+    overflow: hidden;
+}

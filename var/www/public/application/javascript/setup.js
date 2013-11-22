@@ -10,6 +10,7 @@ $(document).ready(function() {
 
         if($(this).hasClass('active')) {
             $(this).removeClass('active');
+            $('.page-active').addClass('active');
         } else {
             $(this).siblings().removeClass('active');
             $(this).addClass('active');
@@ -21,5 +22,7 @@ $(document).ready(function() {
         debug: false
     });
 
-    $('.ui.dropdown').dropdown();
+    $('.ui.dropdown').dropdown({
+        debug: false
+    });
 });

@@ -65,7 +65,7 @@ class Application_Plugin_LayoutPlugin extends Zend_Controller_Plugin_Abstract {
         $mvc = array($request->getModuleName(), $request->getControllerName(), $request->getActionName() . '.js');
         $actionjs = '../../application/javascript/' . implode('/', $mvc);
 
-        $scripts = array("jquery-2.0.3.min.js", "semantic.min.js", '../../application/javascript/setup.js');
+        $scripts = array("jquery-2.0.3.min.js", "jquery-migrate-1.2.1.min.js", "semantic.min.js", '../../application/javascript/setup.js');
         $scripts[] = '../../application/vendor/jqplot/jquery.jqplot.min.js';
         $scripts[] = '../../application/vendor/jqplot/plugins/jqplot.pieRenderer.min.js';
         $scripts[] = $actionjs;

@@ -13,12 +13,8 @@
 <body>
     <?php echo $this->partial('partials/navigation.phtml', array("menu" => $this->menus)) ?>
 
-    <div class="ui six column divided grid">
-        <div class="row">
-            <div class="column">
-                <?php echo $this->layout()->content; ?>
-            </div>
-        </div>
+    <div id="app_wrapper" class="ui grid">
+        <?php echo $this->layout()->content; ?>
     </div>
 
     <?php echo $this->partial('partials/sidebar.phtml', array("menu", $this->menus)) ?>
