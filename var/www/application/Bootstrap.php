@@ -38,9 +38,18 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
      * @return void
      */
     protected function _initAutoload() {
-        $autoloader = new Zend_Application_Module_Autoloader(array(
+        new Zend_Application_Module_Autoloader(array(
             'basePath' => APPLICATION_PATH.'/modules/default/',
             'namespace' => 'Default'
         ));
+
+        new Zend_Application_Module_Autoloader(array(
+            'basePath' => APPLICATION_PATH.'/modules/telephony/',
+            'namespace' => 'Telephony'
+        ));
+    }
+
+    public function _initPagination() {
+        Zend_View_Helper_PaginationControl::setDefaultViewPartial('pagination.phtml');
     }
 }

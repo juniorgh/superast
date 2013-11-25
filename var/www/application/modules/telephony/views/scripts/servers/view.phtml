@@ -1,1 +1,81 @@
-<br /><br /><center>View script for controller <b>Servers</b> and script/action name <b>view</b></center>
+<?php echo $this->partial('header.phtml'); ?>
+<div id="view_wrapper">
+    <div class="ui top red attached segment">
+        <h4 class="ui header">
+            Visualizando servidor <?php echo $this->server['server_hostname'] ?>
+        </h4>
+    </div>
+    <div class="ui attached segment">
+        <div class="ui three column grid">
+            <div class="column">
+                <b>Hostname</b>
+            </div>
+            <div class="column">
+                <?php echo $this->server['server_hostname'] ?>
+            </div>
+        </div>
+
+        <div class="ui three column grid">
+            <div class="column">
+                <b>IP</b>
+            </div>
+            <div class="column">
+                <?php echo $this->server['server_ip_address'] ?>
+            </div>
+        </div>
+
+        <div class="ui three column grid">
+            <div class="column">
+                <b>Usuário MySQL</b>
+            </div>
+            <div class="column">
+                <?php echo $this->server['server_database_user'] ?>
+            </div>
+        </div>
+
+        <div class="ui three column grid">
+            <div class="column">
+                <b>Senha MySQL</b>
+            </div>
+            <div class="column">
+                <?php echo $this->server['server_database_password'] ?>
+            </div>
+        </div>
+
+        <div class="ui three column grid">
+            <div class="column">
+                <b>Usuário AMI</b>
+            </div>
+            <div class="column">
+                <?php echo $this->server['server_ami_user'] ?>
+            </div>
+        </div>
+
+        <div class="ui three column grid">
+            <div class="column">
+                <b>Senha AMI</b>
+            </div>
+            <div class="column">
+                <?php echo $this->server['server_ami_secret'] ?>
+            </div>
+        </div>
+
+        <div class="ui three column grid">
+            <div class="column">
+                <b>Elastix?</b>
+            </div>
+            <div class="column">
+                <?php echo $this->server['server_is_elastix'] == 0 ? "Não" : "Sim" ?>
+            </div>
+        </div>
+    </div>
+    <div class="ui bottom attached segment">
+        <a href="<?php echo $this->activeIndexAction ?>" class="ui red labeled icon button">
+            <i class="reply mail icon"></i> Voltar
+        </a>
+        
+        <a href="<?php echo $this->url(array('module' => $this->moduleName, 'controller' => $this->controllerName, 'action' => 'edit', 'id' => $this->server['server_id']), 'edit_action', true) ?>" class="ui blue labeled icon button">
+            <i class="edit icon"></i> Editar
+        </a>
+    </div>
+</div>

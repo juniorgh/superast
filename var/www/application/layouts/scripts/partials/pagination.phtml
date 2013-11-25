@@ -1,19 +1,49 @@
+<?php if($this->pageCount > 0) { ?>
 <div id="paginator">
     <div class="ui pagination menu">
-        <a class="icon item">
+        <?php
+        if (isset($this->previous)) {
+            $this->params['page'] = $this->previous;
+            ?>
+        <a class="icon item" href="<?php echo $this->url($this->params, 'index_action_pager') ?>">
             <i class="icon left arrow"></i>
         </a>
-        <a class="active item">1</a>
-        <div class="disabled item">...</div>
-        <a class="item">10</a>
-        <a class="item">11</a>
-        <a class="item">12</a>
-        <a class="icon item">
+        <?php
+        } else { ?>
+        <a class="icon disabled item">
+            <i class="icon left arrow"></i>
+        </a>
+        <?php }
+        foreach ($this->pagesInRange as $page) {
+            $this->params['page'] = $page;
+            if ($page == $this->current) { ?>
+            <a href="<?php echo $this->url($this->params, 'index_action_pager') ?>" class="active item">
+                <?php echo $page ?>
+            </a>
+                <?php
+            } else { ?>
+            <a class="item" href="<?php echo $this->url($this->params, 'index_action_pager') ?>"><?php echo $page ?></a>
+                <?php
+            }
+        }
+
+        if (isset($this->next)) {
+            $this->params['page'] = $this->next;
+            ?>
+        <a class="icon item" href="<?php echo $this->url($this->params, 'index_action_pager') ?>">
             <i class="icon right arrow"></i>
         </a>
+        <?php } else { ?>
+        <a class="icon disabled item">
+            <i class="icon right arrow"></i>
+        </a>
+        <?php } ?>
     </div>
 
     <div class="ui text menu">
-        <div class="item">Mostrando registros de 1 a 3 de 3 encontrados</div>
+        <div class="item">
+            <?php printf('Mostrando registros de %d à %d de %d encontrados', $this->firstItemNumber, $this->lastItemNumber, $this->totalItemCount) ?>
+        </div>
     </div>
 </div>
+<?php } ?>

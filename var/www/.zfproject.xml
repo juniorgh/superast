@@ -93,7 +93,12 @@
           </controllersDirectory>
           <formsDirectory enabled="false"/>
           <layoutsDirectory enabled="false"/>
-          <modelsDirectory/>
+          <modelsDirectory>
+            <dbTableDirectory>
+              <dbTableFile dbTableName="Server"/>
+            </dbTableDirectory>
+            <modelFile modelName="Server"/>
+          </modelsDirectory>
           <viewsDirectory>
             <viewScriptsDirectory>
               <viewControllerScriptsDirectory forControllerName="Servers">

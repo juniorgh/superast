@@ -81,8 +81,8 @@ CREATE TABLE `server` (
     `server_ip_address` VARCHAR(255),
     `server_database_user` VARCHAR(255),
     `server_database_password` VARCHAR(255),
-    `server_asterisk_manager_user` VARCHAR(255),
-    `server_asterisk_manager_secret` VARCHAR(255),
+    `server_ami_user` VARCHAR(255),
+    `server_ami_secret` VARCHAR(255),
     `server_is_elastix` TINYINT(1) DEFAULT 0,
     `server_active` TINYINT(1) DEFAULT 1
 )  ENGINE=InnoDB;

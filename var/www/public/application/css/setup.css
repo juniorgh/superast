@@ -53,3 +53,7 @@ body {
 #app_wrapper #paginator > div:last-child {
     float: right;
 }
+
+#view_wrapper .ui.three.column.grid:not(:first-child) {
+    padding-top: 10px;
+}
