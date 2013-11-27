@@ -76,11 +76,19 @@
               <dbTableFile dbTableName="Group"/>
               <dbTableFile dbTableName="Roles"/>
               <dbTableFile dbTableName="Role"/>
+              <dbTableFile dbTableName="User"/>
+              <dbTableFile dbTableName="UserGroup"/>
+              <dbTableFile dbTableName="UserCompany"/>
+              <dbTableFile dbTableName="GroupMenu"/>
             </dbTableDirectory>
             <modelFile modelName="Company"/>
             <modelFile modelName="Menu"/>
             <modelFile modelName="Group"/>
             <modelFile modelName="Role"/>
+            <modelFile modelName="User"/>
+            <modelFile modelName="UserGroup"/>
+            <modelFile modelName="UserCompany"/>
+            <modelFile modelName="GroupMenu"/>
           </modelsDirectory>
           <viewsDirectory>
             <viewScriptsDirectory>

@@ -38,13 +38,9 @@ $(document).ready(function() {
             }
         }).modal('show');
     });
-    
-    $('.ui.sidebar').each(function(){
-        $(this).sidebar({
-            // useCSS: true,
-            debug: true,
-            verbose: true
-        });
+
+    $('.ui.sidebar').sidebar({
+        debug: false
     });
 
     $('.ui.dropdown').dropdown({
@@ -55,7 +51,13 @@ $(document).ready(function() {
         debug: false
     });
 
-    $('.ui.form').form();
+    $('.ui.form').form({
+        debug: false
+    });
+
+    $('.ui.checkbox').checkbox({
+        debug: false
+    });
 
     // $('.ui.sidebar').sidebar('setting', 'onShow', function() {}); /* incluindo callbacks para a sidebar */
 });
