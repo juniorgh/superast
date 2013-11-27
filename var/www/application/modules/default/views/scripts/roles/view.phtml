@@ -1,0 +1,27 @@
+<?php echo $this->partial_header; ?>
+<div id="view_wrapper">
+    <div class="ui top red attached segment">
+        <h4 class="ui header">
+            Visualizando cargo <?php echo $this->role['role_name'] ?>
+        </h4>
+    </div>
+    <div class="ui attached segment">
+        <div class="ui three column grid">
+            <div class="column">
+                <b>Nome</b>
+            </div>
+            <div class="column">
+                <?php echo $this->role['role_name']; ?>
+            </div>
+        </div>
+    </div>
+    <div class="ui bottom attached segment">
+        <a href="<?php echo $this->actions['index'] ?>" class="ui red labeled icon button">
+            <i class="reply mail icon"></i> Voltar
+        </a>
+        
+        <a href="<?php echo $this->url(array('module' => $this->moduleName, 'controller' => $this->controllerName, 'action' => 'edit', 'id' => $this->role['role_id']), $this->routes['edit'], true) ?>" class="ui blue labeled icon button">
+            <i class="edit icon"></i> Editar
+        </a>
+    </div>
+</div>
