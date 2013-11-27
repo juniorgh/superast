@@ -1,11 +1,6 @@
 <?php
 
-class Default_MenusController extends Zend_Controller_Action
-{
-
-    public function init() {
-        /* Initialize action controller here */
-    }
+class Default_MenusController extends Zend_Controller_Action {
 
     public function indexAction() {
         $where = null;
@@ -31,7 +26,6 @@ class Default_MenusController extends Zend_Controller_Action
         }
 
         $menus = Superast_Utils_MenuIterator::parseHierarchyNames($read);
-
 
         if(!empty($params['menu_name'])) {
             $where[] = "m1.menu_name LIKE '%{$params['menu_name']}%'";
@@ -90,7 +84,6 @@ class Default_MenusController extends Zend_Controller_Action
         $paginator->setPageRange(5);
 
         $this->view->assign('list_menus', $menus);
-        $this->view->assign('params', $params);
         $this->view->assign('menus', $paginator);
         $this->view->assign('hasFilter', $hasFilter);
     }

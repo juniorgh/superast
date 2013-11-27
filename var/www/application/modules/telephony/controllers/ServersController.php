@@ -35,8 +35,6 @@ class Telephony_ServersController extends Zend_Controller_Action {
             $this->view->assign('hasFilter', false);
         }
 
-        $this->view->assign('params', $params);
-
         $query = Telephony_Model_Server::read(null, true, $where, $order);
         $paginator = Zend_Paginator::factory($query);
         $paginator->setCurrentPageNumber(parent::_getParam('page', 1));

@@ -101,58 +101,63 @@ class Application_Plugin_LayoutPlugin extends Zend_Controller_Plugin_Abstract {
             }
         }
 
-        $usuario = Zend_Auth::getInstance()->getIdentity();
-       
-        $menus = Superast_Utils_MenuIterator::findActive($usuario['menus'], $request->getModuleName(), $request->getControllerName());
-        $menus = Superast_Utils_MenuIterator::makeActiveHierarchy($menus);
-        $active_node = Superast_Utils_MenuIterator::getActiveNode($menus);
-        $active = Superast_Utils_MenuIterator::getLastActive($active_node);
-        $title = Superast_Utils_MenuIterator::getPagesTitle($active_node);
+        if($request->getControllerName() != "authentication") {
+            $usuario = Zend_Auth::getInstance()->getIdentity();
 
-        $actions = array('index' => '', 'add' => '', 'save' => '');
+            $menus = Superast_Utils_MenuIterator::findActive($usuario['menus'], $request->getModuleName(), $request->getControllerName());
+            $menus = Superast_Utils_MenuIterator::makeActiveHierarchy($menus);
+            $active_node = Superast_Utils_MenuIterator::getActiveNode($menus);
+            $active = Superast_Utils_MenuIterator::getLastActive($active_node);
+            $title = Superast_Utils_MenuIterator::getPagesTitle($active_node);
 
-        foreach($actions as $k => $v) {
-            $varname = sprintf('active%sAction', ucfirst($k));
-            $route = str_replace('index', $k, $active['menu_route']);
-            $actions[$k] = $view->url(array(
-                    'module' => $request->getModuleName(),
-                    'controller' => $request->getControllerName(),
-                    'action' => $k
-                ), $route, true);
+            $actions = array('index' => '', 'add' => '', 'save' => '');
+
+            foreach($actions as $k => $v) {
+                $varname = sprintf('active%sAction', ucfirst($k));
+                $route = str_replace('index', $k, $active['menu_route']);
+                $actions[$k] = $view->url(array(
+                        'module' => $request->getModuleName(),
+                        'controller' => $request->getControllerName(),
+                        'action' => $k
+                    ), $route, true);
+            }
+
+            $exp = explode('_', $active['menu_route']);
+
+            $route_prefix = $exp[0] != "index" ? $exp[0] . "_" : "";
+
+            $routes = array(
+                "view" => $route_prefix . "view_action",
+                "drop" => $route_prefix . "drop_action",
+                "save" => $route_prefix . "save_action",
+                "edit" => $route_prefix . "edit_action",
+                "add" => $route_prefix . "add_action",
+                "index_pager" => $route_prefix . "index_pager_action",
+                "index" => $route_prefix . "index_action"
+            );
+
+            foreach($title as $t) {
+                $view->headTitle($t);
+            }
+
+            $view->headTitle()->setSeparator(' : ');
+
+            $partial_header = $view->partial('header.phtml', array('active_menu' => $active, 'routes' => $routes));
+            $partial_sidebar = $view->partial('sidebar.phtml', array('menu' => $menus, 'routes' => $routes));
+            $partial_navigation = $view->partial('navigation.phtml', array('menu' => $menus, 'routes' => $routes));
+
+            $view->assign('partial_header', $partial_header);
+            $view->assign('partial_sidebar', $partial_sidebar);
+            $view->assign('partial_navigation', $partial_navigation);
+            $view->assign('actions', $actions);
+            $view->assign('moduleName', $request->getModuleName());
+            $view->assign('controllerName', $request->getControllerName());
+            $view->assign('actionName', $request->getActionName());
+            $view->assign('routes', $routes);
+            $view->assign('params', $request->getParams());
+        } else {
+            $view->headTitle('Autenticação');
         }
-
-        $exp = explode('_', $active['menu_route']);
-
-        $route_prefix = $exp[0] != "index" ? $exp[0] . "_" : "";
-
-        $routes = array(
-            "view" => $route_prefix . "view_action",
-            "drop" => $route_prefix . "drop_action",
-            "save" => $route_prefix . "save_action",
-            "edit" => $route_prefix . "edit_action",
-            "add" => $route_prefix . "add_action",
-            "index_pager" => $route_prefix . "index_pager_action",
-            "index" => $route_prefix . "index_action"
-        );
-
-        foreach($title as $t) {
-            $view->headTitle($t);
-        }
-
-        $view->headTitle()->setSeparator(' : ');
-
-        $partial_header = $view->partial('header.phtml', array('active_menu' => $active, 'routes' => $routes));
-        $partial_sidebar = $view->partial('sidebar.phtml', array('menu' => $menus, 'routes' => $routes));
-        $partial_navigation = $view->partial('navigation.phtml', array('menu' => $menus, 'routes' => $routes));
-
-        $view->assign('partial_header', $partial_header);
-        $view->assign('partial_sidebar', $partial_sidebar);
-        $view->assign('partial_navigation', $partial_navigation);
-        $view->assign('actions', $actions);
-        $view->assign('moduleName', $request->getModuleName());
-        $view->assign('controllerName', $request->getControllerName());
-        $view->assign('actionName', $request->getActionName());
-        $view->assign('routes', $routes);
     }
  
     /**

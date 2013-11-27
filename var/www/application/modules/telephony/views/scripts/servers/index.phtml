@@ -62,25 +62,32 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach($this->servers as $server) { ?>
-        <tr>
-            <td><?php echo $server['server_hostname'] ?></td>
-            <td><?php echo $server['server_ip_address'] ?></td>
-            <td><?php echo $server['server_database_user'] ?></td>
-            <td><?php echo $server['server_ami_user'] ?></td>
-            <td><?php echo $server['server_is_elastix'] == 0 ? "Não" : "Sim" ?></td>
-            <td class="cell action">
-                <a href="<?php echo $this->url(array('module' => $this->moduleName, 'controller' => $this->controllerName, 'action' => 'view', 'id' => $server['server_id']), 'view_action') ?>" class="ui icon small teal button haspopup" data-content="Visualizar">
-                    <i class="forward mail icon"></i>
-                </a>
-                <a href="<?php echo $this->url(array('module' => $this->moduleName, 'controller' => $this->controllerName, 'action' => 'edit', 'id' => $server['server_id']), 'edit_action') ?>" class="ui icon small blue button haspopup" data-content="Editar">
-                    <i class="edit icon"></i>
-                </a>
-                <a href="<?php echo $this->url(array('module' => $this->moduleName, 'controller' => $this->controllerName, 'action' => 'drop', 'id' => $server['server_id']), 'drop_action') ?>" class="ui icon small red button haspopup drop entry" data-content="Excluir">
-                    <i class="remove icon"></i>
-                </a>
-            </td>
-        </tr>
+        <?php
+        if(count($this->servers) > 0) {
+            foreach($this->servers as $server) { ?>
+            <tr>
+                <td><?php echo $server['server_hostname'] ?></td>
+                <td><?php echo $server['server_ip_address'] ?></td>
+                <td><?php echo $server['server_database_user'] ?></td>
+                <td><?php echo $server['server_ami_user'] ?></td>
+                <td><?php echo $server['server_is_elastix'] == 0 ? "Não" : "Sim" ?></td>
+                <td class="cell action">
+                    <a href="<?php echo $this->url(array('module' => $this->moduleName, 'controller' => $this->controllerName, 'action' => 'view', 'id' => $server['server_id']), 'view_action') ?>" class="ui icon small teal button haspopup" data-content="Visualizar">
+                        <i class="forward mail icon"></i>
+                    </a>
+                    <a href="<?php echo $this->url(array('module' => $this->moduleName, 'controller' => $this->controllerName, 'action' => 'edit', 'id' => $server['server_id']), 'edit_action') ?>" class="ui icon small blue button haspopup" data-content="Editar">
+                        <i class="edit icon"></i>
+                    </a>
+                    <a href="<?php echo $this->url(array('module' => $this->moduleName, 'controller' => $this->controllerName, 'action' => 'drop', 'id' => $server['server_id']), 'drop_action') ?>" class="ui icon small red button haspopup drop entry" data-content="Excluir">
+                        <i class="remove icon"></i>
+                    </a>
+                </td>
+            </tr>
+            <?php }
+        } else { ?>
+            <tr>
+                <td colspan="6" class="text center">Nenhum registro encontrado</td>
+            </tr>
         <?php } ?>
     </tbody>
 </table>
