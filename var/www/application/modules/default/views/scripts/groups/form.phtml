@@ -1,4 +1,4 @@
-<?php echo $this->partial_header ?>
+<?php echo $this->partial_header; ?>
 
 <form action="<?php echo $this->actions['save'] ?>" method="post" class="ui fluid form segment">
     <?php if(!is_null($this->group)) { ?>
@@ -9,6 +9,31 @@
         <input id="group_name" name="group_name" value="<?php echo $this->group["group_name"]?>" placeholder="Nome da empresa" type="text">
     </div>
 
+    <div class="field">
+        <label for="group_menu">Menu</label>
+        <div class="ui small buttons">
+            <div data-content="Selecionar tudo" id="checkall" class="ui icon button haspopup"><i class="checked checkbox icon"></i></div>
+            <div data-content="Remover seleção" id="uncheckall" class="ui icon button haspopup"><i class="empty checkbox icon"></i></div>
+        </div>
+    </div>
+
+    <?php
+    $i = 0;
+    foreach($this->list_menus as $k => $v) {
+        $i++;
+        if(($i % 3) === 1) { ?>
+        <div class="three fields">
+        <?php } ?>
+            <div class="field">
+                <div class="ui checkbox menu_checkbox">
+                    <input type="checkbox" name="group_menu[]" value="<?php echo $k ?>"<?php echo in_array($k, $this->menu_added) ? " checked" : "" ?>>
+                    <label><?php echo $v; ?></label>
+                </div>
+            </div>
+        <?php if(($i % 3) === 0 || $i == count($this->list_menus)) { ?>
+        </div>
+        <?php } ?>
+    <?php } ?>
     
     <div class="ui green labeled icon button submit">
         <i class="save icon"></i> Salvar
