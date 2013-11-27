@@ -36,8 +36,8 @@
             <div class="ui dropdown item">
                 William Urbano <i class="icon dropdown"></i>
                 <div class="menu">
-                    <a class="item"><i class="user icon"></i> Meus dados</a>
-                    <a class="item"><i class="off icon"></i> Logout</a>
+                    <a href="<?php echo $this->url(array(), 'settings_users_me_action', true) ?>" class="item"><i class="user icon"></i> Meus dados</a>
+                    <a href="<?php echo $this->url(array(), 'authentication_logout', true) ?>" class="item"><i class="off icon"></i> Logout</a>
                 </div>
             </div>
         </div>

@@ -1,1 +1,19 @@
-<br /><br /><center>View script for controller <b>Groups</b> and script/action name <b>form</b></center>
+<?php echo $this->partial_header ?>
+
+<form action="<?php echo $this->actions['save'] ?>" method="post" class="ui fluid form segment">
+    <?php if(!is_null($this->group)) { ?>
+    <input type="hidden" id="group_id" name="group_id" value="<?php echo $this->group['group_id'] ?>">
+    <?php } ?>
+    <div class="field">
+        <label for="group_name">Nome</label>
+        <input id="group_name" name="group_name" value="<?php echo $this->group["group_name"]?>" placeholder="Nome da empresa" type="text">
+    </div>
+
+    
+    <div class="ui green labeled icon button submit">
+        <i class="save icon"></i> Salvar
+    </div>
+    <a href="<?php echo $this->actions['index'] ?>" class="ui red labeled icon button">
+        <i class="reply mail icon"></i> Cancelar
+    </a>
+</form>

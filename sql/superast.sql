@@ -74,11 +74,12 @@ INSERT INTO `user` (`user_id`, `user_name`, `user_login`, `user_password`, `user
 CREATE TABLE `group` (
     `group_id` INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `group_name` VARCHAR(255),
+    `group_visible` TINYINT(1) DEFAULT 1,
     `group_active` TINYINT(1) DEFAULT 1
 )  ENGINE=InnoDB AUTO_INCREMENT=2;
 
-INSERT INTO `group` (`group_id`, `group_name`, `group_active`) VALUES
-(1, 'Master', 1);
+INSERT INTO `group` (`group_id`, `group_name`, `group_visible`, `group_active`) VALUES
+(1, 'Master', 1, 1);
 
 CREATE TABLE `user_group` (
     `user_group_id` INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,

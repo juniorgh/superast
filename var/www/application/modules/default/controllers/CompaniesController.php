@@ -12,6 +12,7 @@ class Default_CompaniesController extends Zend_Controller_Action {
 
         if(!empty($params['company_name'])) {
             $where[] = "company_name LIKE '%{$params['company_name']}%'";
+            $hasFilter = true;
         }
 
         $query = Default_Model_Company::read(null, true, $where, $order);
@@ -39,11 +40,9 @@ class Default_CompaniesController extends Zend_Controller_Action {
         $request = $this->getRequest();
         if($request->isPost()) {
             $params = $request->getPost();
-            echo '<pre>';
-            print_r($params);
-            if(!array_key_exists('company_id', $params)) { // insert
+            if(!array_key_exists('company_id', $params)) {
                 Default_Model_Company::create($params);
-            } else { // update
+            } else {
                 Default_Model_Company::update($params);
             }
         }

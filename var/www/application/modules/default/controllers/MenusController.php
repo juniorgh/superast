@@ -5,8 +5,7 @@ class Default_MenusController extends Zend_Controller_Action {
     public function indexAction() {
         $where = null;
         $order = null;
-        $request = $this->getRequest();
-        $params = parent::_getAllParams();
+        $params = $this->getRequest()->getParams();
         $hasFilter = false;
 
         $read = Default_Model_Menu::read(null, false, array('menu_parent = 0 OR menu_parent IS NULL'));
@@ -89,7 +88,7 @@ class Default_MenusController extends Zend_Controller_Action {
     }
 
     public function viewAction() {
-        $id = parent::_getParam('id', null);
+        $id = $this->getRequest()->getParam('id', null);
 
         if(!is_null($id)) {
             $menu = Default_Model_Menu::read($id);
@@ -115,8 +114,7 @@ class Default_MenusController extends Zend_Controller_Action {
                     $result = Default_Model_Menu::create($params);
                 }
 
-                $url = $this->view->url(array('module' => 'default', 'controller' => 'menus', 'action' => 'index'), 'index_action', true);
-                $this->_redirect($url);
+                $this->_redirect($this->view->actions['index']);
             }
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -124,13 +122,11 @@ class Default_MenusController extends Zend_Controller_Action {
     }
 
     public function dropAction() {
-        $id = parent::_getParam('id', null);
-
+        $id = $this->getRequest()->getParam('id', null);
 
         if(!is_null($id)) {
             Default_Model_Menu::delete($id);
-            $url = $this->view->url(array('module' => 'default', 'controller' => 'menus', 'action' => 'index'), 'settings_index_action');
-            $this->_redirect($url);
+            $this->_redirect($this->view->actions['index']);
         }
     }
 
@@ -153,7 +149,7 @@ class Default_MenusController extends Zend_Controller_Action {
 
         $menus = Superast_Utils_MenuIterator::parseHierarchyNames($read);
 
-        $id = parent::_getParam('id', null);
+        $id = $this->getRequest()->getParam('id', null);
 
         if(!is_null($id)) {
             $menu = Default_Model_Menu::read($id);

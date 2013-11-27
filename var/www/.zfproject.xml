@@ -70,9 +70,11 @@
             <dbTableDirectory>
               <dbTableFile dbTableName="Company"/>
               <dbTableFile dbTableName="Menu"/>
+              <dbTableFile dbTableName="Group"/>
             </dbTableDirectory>
             <modelFile modelName="Company"/>
             <modelFile modelName="Menu"/>
+            <modelFile modelName="Group"/>
           </modelsDirectory>
           <viewsDirectory>
             <viewScriptsDirectory>
