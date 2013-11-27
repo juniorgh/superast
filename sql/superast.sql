@@ -15,7 +15,7 @@ CREATE TABLE `menu` (
     `menu_icon_class` VARCHAR(255),
     `menu_parent` INT(10) UNSIGNED,
     `menu_order` INT
-)  ENGINE=InnoDB AUTO_INCREMENT=22;
+)  ENGINE=InnoDB AUTO_INCREMENT=23;
 
 INSERT INTO `menu` (`menu_id`, `menu_name`, `menu_description`, `menu_page_title`, `menu_module`, `menu_controller`, `menu_action`, `menu_route`, `menu_data_target`, `menu_icon_class`, `menu_parent`, `menu_order`) VALUES
 (1, 'Dashboard', 'Resumo de informaÃ§Ãµes da aplicaÃ§Ã£o', 'Dashboard', 'default', 'index', 'index', 'dashboard_action', '', 'dashboard', NULL, 1),
@@ -38,7 +38,8 @@ INSERT INTO `menu` (`menu_id`, `menu_name`, `menu_description`, `menu_page_title
 (18, 'Empresas', 'Gerenciamento de empresas de usuÃ¡rios cadastrados', 'Empresas', 'default', 'companies', 'index', 'settings_index_action', '', 'building', 17, 1),
 (19, 'Grupos', 'Gerenciamento de grupos de usuÃ¡rios', 'Grupos', 'default', 'groups', 'index', 'settings_index_action', '', 'users', 17, 2),
 (20, 'UsuÃ¡rios', 'Gerenciamento de usuÃ¡rios do sistema', 'UsuÃ¡rios', 'default', 'users', 'index', 'settings_index_action', '', 'user', 17, 3),
-(21, 'Menus', 'Gerenciamento de Ã¡reas desenvolvidas disponÃ­veis do sistema', 'Menus', 'default', 'menus', 'index', 'settings_index_action', '', 'reorder', 17, 4);
+(21, 'Menus', 'Gerenciamento de Ã¡reas desenvolvidas disponÃ­veis do sistema', 'Menus', 'default', 'menus', 'index', 'settings_index_action', '', 'reorder', 17, 4),
+(22, 'Cargos', 'Cargos exercidos pelos usuÃ¡rios', 'Cargos', 'default', 'roles', 'index', 'settings_index_action', '', 'wrench', 17, 2);
 
 CREATE TABLE `company` (
     `company_id` INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -51,11 +52,11 @@ INSERT INTO `company` (`company_id`, `company_name`, `company_active`) VALUES
 
 CREATE TABLE `role` (
     `role_id` INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    `role_description` VARCHAR(255),
+    `role_name` VARCHAR(255),
     `role_active` TINYINT(1) DEFAULT 1
 )  ENGINE=InnoDB AUTO_INCREMENT=2;
 
-INSERT INTO `role` (`role_id`, `role_description`, `role_active`) VALUES
+INSERT INTO `role` (`role_id`, `role_name`, `role_active`) VALUES
 (1, 'Desenvolvedor', 1);
 
 CREATE TABLE `user` (

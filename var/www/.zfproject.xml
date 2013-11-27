@@ -61,6 +61,9 @@
               <actionMethod actionName="login"/>
               <actionMethod actionName="logout"/>
             </controllerFile>
+            <controllerFile controllerName="Roles">
+              <actionMethod actionName="index"/>
+            </controllerFile>
           </controllersDirectory>
           <formsDirectory>
             <formFile formName="Autenticacao"/>
@@ -71,10 +74,13 @@
               <dbTableFile dbTableName="Company"/>
               <dbTableFile dbTableName="Menu"/>
               <dbTableFile dbTableName="Group"/>
+              <dbTableFile dbTableName="Roles"/>
+              <dbTableFile dbTableName="Role"/>
             </dbTableDirectory>
             <modelFile modelName="Company"/>
             <modelFile modelName="Menu"/>
             <modelFile modelName="Group"/>
+            <modelFile modelName="Role"/>
           </modelsDirectory>
           <viewsDirectory>
             <viewScriptsDirectory>
@@ -155,6 +161,9 @@
               </viewControllerScriptsDirectory>
               <viewControllerScriptsDirectory forControllerName="Authentication">
                 <viewScriptFile forActionName="logout"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Roles">
+                <viewScriptFile forActionName="index"/>
               </viewControllerScriptsDirectory>
             </viewScriptsDirectory>
             <viewHelpersDirectory/>
@@ -306,6 +315,7 @@
           <testApplicationControllerFile filesystemName="GroupsControllerTest.php"/>
           <testApplicationControllerFile filesystemName="CompaniesControllerTest.php"/>
           <testApplicationControllerFile filesystemName="AuthenticationControllerTest.php"/>
+          <testApplicationControllerFile filesystemName="RolesControllerTest.php"/>
         </testApplicationControllerDirectory>
       </testApplicationDirectory>
       <testLibraryDirectory>
