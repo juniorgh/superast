@@ -43,7 +43,7 @@ INSERT INTO `menu` (`menu_id`, `menu_name`, `menu_description`, `menu_page_title
 CREATE TABLE `company` (
     `company_id` INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `company_name` VARCHAR(255),
-    `company_active` TINYINT(1)
+    `company_active` TINYINT(1) DEFAULT 1
 )  ENGINE=InnoDB AUTO_INCREMENT=2;
 
 INSERT INTO `company` (`company_id`, `company_name`, `company_active`) VALUES
