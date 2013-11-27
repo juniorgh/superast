@@ -1,0 +1,107 @@
+<?php echo $this->partial_header; ?>
+<div id="view_wrapper">
+    <div class="ui top red attached segment">
+        <h4 class="ui header">
+            Visualizando menu <?php echo $this->menu['menu_name'] ?>
+        </h4>
+    </div>
+    <div class="ui attached segment">
+        <div class="ui three column grid">
+            <div class="column">
+                <b>Nome</b>
+            </div>
+            <div class="column">
+                <?php echo $this->menu['menu_name']; ?>
+            </div>
+        </div>
+        <div class="ui three column grid">
+            <div class="column">
+                <b>Título da página</b>
+            </div>
+            <div class="column">
+                <?php echo $this->menu['menu_page_title']; ?>
+            </div>
+        </div>
+        <div class="ui three column grid">
+            <div class="column">
+                <b>Descrição</b>
+            </div>
+            <div class="column">
+                <?php echo $this->menu['menu_description']; ?>
+            </div>
+        </div>
+        <div class="ui three column grid">
+            <div class="column">
+                <b>Módulo</b>
+            </div>
+            <div class="column">
+                <?php echo $this->menu['menu_module']; ?>
+            </div>
+        </div>
+        <div class="ui three column grid">
+            <div class="column">
+                <b>Controladora</b>
+            </div>
+            <div class="column">
+                <?php echo $this->menu['menu_controller']; ?>
+            </div>
+        </div>
+        <div class="ui three column grid">
+            <div class="column">
+                <b>Ação</b>
+            </div>
+            <div class="column">
+                <?php echo $this->menu['menu_action']; ?>
+            </div>
+        </div>
+        <div class="ui three column grid">
+            <div class="column">
+                <b>Rota</b>
+            </div>
+            <div class="column">
+                <?php echo $this->menu['menu_route']; ?>
+            </div>
+        </div>
+        <div class="ui three column grid">
+            <div class="column">
+                <b>Elemento alvo</b>
+            </div>
+            <div class="column">
+                <?php echo $this->menu['menu_data_target']; ?>
+            </div>
+        </div>
+        <div class="ui three column grid">
+            <div class="column">
+                <b>Ícone</b>
+            </div>
+            <div class="column">
+                <?php echo $this->menu['menu_icon_class']; ?>
+            </div>
+        </div>
+        <div class="ui three column grid">
+            <div class="column">
+                <b>Menu superior</b>
+            </div>
+            <div class="column">
+                <?php echo $this->menu['menu_parent']; ?>
+            </div>
+        </div>
+            <div class="ui three column grid">
+            <div class="column">
+                <b>Ordem</b>
+            </div>
+            <div class="column">
+                <?php printf('%dº', $this->menu['menu_order']); ?>
+            </div>
+        </div>
+    </div>
+    <div class="ui bottom attached segment">
+        <a href="<?php echo $this->actions['index'] ?>" class="ui red labeled icon button">
+            <i class="reply mail icon"></i> Voltar
+        </a>
+        
+        <a href="<?php echo $this->url(array('module' => $this->moduleName, 'controller' => $this->controllerName, 'action' => 'edit', 'id' => $this->menu['menu_id']), $this->routes['edit'], true) ?>" class="ui blue labeled icon button">
+            <i class="edit icon"></i> Editar
+        </a>
+    </div>
+</div>

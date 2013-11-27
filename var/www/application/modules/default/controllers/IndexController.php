@@ -27,8 +27,9 @@ class Default_IndexController extends Zend_Controller_Action
      */
     public function indexAction()
     {
-        $form = new Default_Form_Autenticacao();
-        $this->view->assign("form", $form);
+        echo "<pre>";
+        print_r($this->_getAllParams());
+        echo '</pre>';
     }
 
 

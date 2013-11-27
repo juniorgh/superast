@@ -1,0 +1,119 @@
+<?php echo $this->partial_header ?>
+
+<form class="ui fluid form segment transition<?php echo !$this->hasFilter ? " hidden" : "" ?>" id="table_filter" method="post">
+    <div class="two fields">
+        <div class="field">
+            <label for="menu_name">Nome</label>
+            <input id="menu_name" name="menu_name" value="<?php echo isset($this->params["menu_name"]) ? $this->params["menu_name"] : "" ?>" placeholder="Nome do menu" type="text">
+        </div>
+        <div class="field">
+            <label for="menu_page_title">Título da página</label>
+            <input id="menu_page_title" name="menu_page_title" value="<?php echo isset($this->params["menu_page_title"]) ? $this->params["menu_page_title"] : "" ?>" placeholder="Título para ser exibido quando for a página ativa" type="text">
+        </div>
+    </div>
+    <div class="field">
+        <label for="menu_description">Descrição</label>
+        <input id="menu_description" name="menu_description" value="<?php echo isset($this->params["menu_description"]) ? $this->params["menu_description"] : "" ?>" placeholder="Breve descrição do menu" type="text">
+    </div>
+    <div class="four fields">
+        <div class="field">
+            <label for="menu_module">Módulo</label>
+            <input id="menu_module" name="menu_module" value="<?php echo isset($this->params["menu_module"]) ? $this->params["menu_module"] : "" ?>" placeholder="Nome do módulo do Zend Framework" type="text">
+        </div>
+        <div class="field">
+            <label for="menu_controller">Controladora</label>
+            <input id="menu_controller" name="menu_controller" value="<?php echo isset($this->params["menu_controller"]) ? $this->params["menu_controller"] : "" ?>" placeholder="Nome da controladora do Zend Framework" type="text">
+        </div>
+        <div class="field">
+            <label for="menu_action">Ação</label>
+            <input id="menu_action" name="menu_action" value="<?php echo isset($this->params["menu_action"]) ? $this->params["menu_action"] : "" ?>" placeholder="Nome da ação do Zend Framework" type="text">
+        </div>
+        <div class="field">
+            <label for="menu_route">Rota</label>
+            <input id="menu_route" name="menu_route" value="<?php echo isset($this->params["menu_route"]) ? $this->params["menu_route"] : "" ?>" placeholder="Nome da rota URL do Zend Framework" type="text">
+        </div>
+    </div>
+    <div class="two fields">
+        <div class="field">
+            <label for="menu_data_target">Elemento alvo</label>
+            <input id="menu_data_target" name="menu_data_target" value="<?php echo isset($this->params["menu_data_target"]) ? $this->params["menu_data_target"] : "" ?>" placeholder="Seletor jQuery do elemento de destino do menu (ex: sidebars)" type="text">
+        </div>
+        <div class="field">
+            <label for="menu_icon_class">Ícone</label>
+            <input id="menu_icon_class" name="menu_icon_class" value="<?php echo isset($this->params["menu_icon_class"]) ? $this->params["menu_icon_class"] : "" ?>" placeholder="Classe do ícone que representa o menu" type="text">
+        </div>
+    </div>
+    <div class="field">
+        <label for="menu_parent">Menu superior</label>
+        <div class="ui selection dropdown">
+            <input type="hidden" name="menu_parent" id="menu_parent" value="<?php echo isset($this->params["menu_parent"]) ? $this->params["menu_parent"] : "selecione" ?>">
+            <div class="text"></div>
+            <i class="dropdown icon"></i>
+            <div class="menu ui transition hidden">
+                <div class="item" data-value="selecione">Selecione</div>
+                <?php foreach($this->list_menus as $k => $v) { ?> 
+                <div class="item" data-value="<?php echo $k ?>"><?php echo $v ?></div>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+    <div class="ui green labeled icon button submit">
+        <i class="filter icon"></i> Filtrar
+    </div>
+    <a href="<?php echo $this->actions['index'] ?>" class="ui red labeled icon button">
+        <i class="trash icon"></i> Limpar
+    </a>
+</form>
+
+<a href="<?php echo $this->actions['add'] ?>" class="ui orange labeled icon button">
+    <i class="add icon"></i> Novo menu
+</a>
+
+<div class="ui orange labeled icon button" data-toggle="filter" data-target="#table_filter" data-placement="slide down">
+    <i class="filter icon"></i> Filtros
+</div>
+
+<table class="ui table padded segment">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Superior</th>
+            <th class="cell action">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($this->menus as $menu) {
+            $superior = " - ";
+            if(strlen($menu['m2_menu_name'])) {
+                $superior = $menu['m2_menu_name'];
+                if(strlen($menu['m3_menu_name']) > 0) {
+                    $superior = sprintf('%s > %s', $menu['m3_menu_name'], $superior);
+                    if(strlen($menu['m4_menu_name']) > 0) {
+                        $superior = sprintf('%s > %s', $menu['m3_menu_name'], $superior);
+                    }
+                }
+            }
+            ?>
+        <tr>
+            <td><?php echo $menu['m1_menu_name'] ?></td>
+            <td><?php echo $superior ?></td>
+            <td class="cell action">
+                <a href="<?php echo $this->url(array('module' => $this->moduleName, 'controller' => $this->controllerName, 'action' => 'view', 'id' => $menu['m1_menu_id']), $this->routes['view']) ?>" class="ui icon small teal button haspopup" data-content="Visualizar">
+                    <i class="forward mail icon"></i>
+                </a>
+                <a href="<?php echo $this->url(array('module' => $this->moduleName, 'controller' => $this->controllerName, 'action' => 'edit', 'id' => $menu['m1_menu_id']), $this->routes['edit']) ?>" class="ui icon small blue button haspopup" data-content="Editar">
+                    <i class="edit icon"></i>
+                </a>
+                <a href="<?php echo $this->url(array('module' => $this->moduleName, 'controller' => $this->controllerName, 'action' => 'drop', 'id' => $menu['m1_menu_id']), $this->routes['drop']) ?>" class="ui icon small red button haspopup drop entry" data-content="Excluir">
+                    <i class="remove icon"></i>
+                </a>
+            </td>
+        </tr>
+        <?php } ?>
+    </tbody>
+</table>
+
+<?php
+echo $this->paginationControl($this->menus, 'Sliding', 'pagination.phtml', array('params' => $this->params, 'routes' => $this->routes));
+echo $this->partial('modaldropentry.phtml');
+?>

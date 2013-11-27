@@ -1,0 +1,31 @@
+<div class="ui middle aligned three column grid">
+    <div class="row">
+        <div class="column"></div>
+        <div class="column">
+            <form action="<?php echo $this->url(array('module' => 'default', 'controller' => 'authentication', 'action' => 'login'), 'authentication_login') ?>" class="ui form<?php echo $this->hasError ? " error" : "" ?> segment" style="margin-top: 100px" method="post">
+                <?php if($this->hasError) { ?>
+                <div class="ui error message">
+                    <div class="header">Dados inválidos</div>
+                    <p>Usuário ou senha estão incorretos</p>
+                </div>
+                <?php } ?>
+                <div class="field">
+                    <label>Usuário</label>
+                    <div class="ui left icon input">
+                        <input type="text" placeholder="Usuário" name="user_login">
+                        <i class="user icon"></i>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Senha</label>
+                    <div class="ui left icon input">
+                        <input type="password" placeholder="Senha" name="user_password">
+                        <i class="lock icon"></i>
+                    </div>
+                </div>
+                <div class="ui blue submit button">Login</div>
+            </form>
+        </div>
+        <div class="column"></div>
+    </div>
+</div>
