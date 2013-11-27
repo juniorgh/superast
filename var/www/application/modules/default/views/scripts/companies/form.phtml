@@ -1,1 +1,19 @@
-<br /><br /><center>View script for controller <b>Companies</b> and script/action name <b>form</b></center>
+<?php echo $this->partial_header ?>
+
+<form action="<?php echo $this->actions['save'] ?>" method="post" class="ui fluid form segment">
+    <?php if(!is_null($this->company)) { ?>
+    <input type="hidden" id="company_id" name="company_id" value="<?php echo $this->company['company_id'] ?>">
+    <?php } ?>
+    <div class="field">
+        <label for="company_name">Nome</label>
+        <input id="company_name" name="company_name" value="<?php echo $this->company["company_name"]?>" placeholder="Nome da empresa" type="text">
+    </div>
+
+    
+    <div class="ui green labeled icon button submit">
+        <i class="save icon"></i> Salvar
+    </div>
+    <a href="<?php echo $this->actions['index'] ?>" class="ui red labeled icon button">
+        <i class="reply mail icon"></i> Cancelar
+    </a>
+</form>

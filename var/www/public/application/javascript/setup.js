@@ -53,9 +53,7 @@ $(document).ready(function() {
         debug: false
     });
 
-    if($('#table_filter').length > 0) {
-        $('#table_filter').form();
-    }
+    $('.ui.form').form();
 
     // $('.ui.sidebar').sidebar('setting', 'onShow', function() {}); /* incluindo callbacks para a sidebar */
 });

@@ -58,3 +58,7 @@ body {
 #view_wrapper .ui.three.column.grid:not(:first-child) {
     padding-top: 10px;
 }
+
+.text.center {
+    text-align: center;
+}

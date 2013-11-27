@@ -22,7 +22,7 @@ class Default_Model_Company {
             if(!is_null($order)) {
                 $query->order($order);
             } else {
-                $query->order('company_hostname');
+                $query->order('company_name');
             }
 
             if($pager == false) {

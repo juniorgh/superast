@@ -82,33 +82,40 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach($this->menus as $menu) {
-            $superior = " - ";
-            if(strlen($menu['m2_menu_name'])) {
-                $superior = $menu['m2_menu_name'];
-                if(strlen($menu['m3_menu_name']) > 0) {
-                    $superior = sprintf('%s > %s', $menu['m3_menu_name'], $superior);
-                    if(strlen($menu['m4_menu_name']) > 0) {
+        <?php
+        if(count($this->menus) > 0) {
+            foreach($this->menus as $menu) {
+                $superior = " - ";
+                if(strlen($menu['m2_menu_name'])) {
+                    $superior = $menu['m2_menu_name'];
+                    if(strlen($menu['m3_menu_name']) > 0) {
                         $superior = sprintf('%s > %s', $menu['m3_menu_name'], $superior);
+                        if(strlen($menu['m4_menu_name']) > 0) {
+                            $superior = sprintf('%s > %s', $menu['m3_menu_name'], $superior);
+                        }
                     }
                 }
-            }
-            ?>
-        <tr>
-            <td><?php echo $menu['m1_menu_name'] ?></td>
-            <td><?php echo $superior ?></td>
-            <td class="cell action">
-                <a href="<?php echo $this->url(array('module' => $this->moduleName, 'controller' => $this->controllerName, 'action' => 'view', 'id' => $menu['m1_menu_id']), $this->routes['view']) ?>" class="ui icon small teal button haspopup" data-content="Visualizar">
-                    <i class="forward mail icon"></i>
-                </a>
-                <a href="<?php echo $this->url(array('module' => $this->moduleName, 'controller' => $this->controllerName, 'action' => 'edit', 'id' => $menu['m1_menu_id']), $this->routes['edit']) ?>" class="ui icon small blue button haspopup" data-content="Editar">
-                    <i class="edit icon"></i>
-                </a>
-                <a href="<?php echo $this->url(array('module' => $this->moduleName, 'controller' => $this->controllerName, 'action' => 'drop', 'id' => $menu['m1_menu_id']), $this->routes['drop']) ?>" class="ui icon small red button haspopup drop entry" data-content="Excluir">
-                    <i class="remove icon"></i>
-                </a>
-            </td>
-        </tr>
+                ?>
+            <tr>
+                <td><?php echo $menu['m1_menu_name'] ?></td>
+                <td><?php echo $superior ?></td>
+                <td class="cell action">
+                    <a href="<?php echo $this->url(array('module' => $this->moduleName, 'controller' => $this->controllerName, 'action' => 'view', 'id' => $menu['m1_menu_id']), $this->routes['view']) ?>" class="ui icon small teal button haspopup" data-content="Visualizar">
+                        <i class="forward mail icon"></i>
+                    </a>
+                    <a href="<?php echo $this->url(array('module' => $this->moduleName, 'controller' => $this->controllerName, 'action' => 'edit', 'id' => $menu['m1_menu_id']), $this->routes['edit']) ?>" class="ui icon small blue button haspopup" data-content="Editar">
+                        <i class="edit icon"></i>
+                    </a>
+                    <a href="<?php echo $this->url(array('module' => $this->moduleName, 'controller' => $this->controllerName, 'action' => 'drop', 'id' => $menu['m1_menu_id']), $this->routes['drop']) ?>" class="ui icon small red button haspopup drop entry" data-content="Excluir">
+                        <i class="remove icon"></i>
+                    </a>
+                </td>
+            </tr>
+        <?php }
+        } else { ?>
+            <tr>
+                <td colspan="3" class="text center">Nenhum registro encontrado</td> 
+            </tr>
         <?php } ?>
     </tbody>
 </table>
