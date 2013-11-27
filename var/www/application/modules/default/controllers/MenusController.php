@@ -133,9 +133,11 @@ class Default_MenusController extends Zend_Controller_Action
     public function dropAction() {
         $id = parent::_getParam('id', null);
 
+
         if(!is_null($id)) {
-            $menu = Default_Model_Menu::read($id);
-            $this->view->assign('menu', $menu);
+            Default_Model_Menu::delete($id);
+            $url = $this->view->url(array('module' => 'default', 'controller' => 'menus', 'action' => 'index'), 'settings_index_action');
+            $this->_redirect($url);
         }
     }
 
