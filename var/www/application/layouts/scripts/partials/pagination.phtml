@@ -5,7 +5,7 @@
         if (isset($this->previous)) {
             $this->params['page'] = $this->previous;
             ?>
-        <a class="icon item" href="<?php echo $this->url($this->params, 'index_action_pager') ?>">
+        <a class="icon item" href="<?php echo $this->url($this->params, $this->routes['index_pager']) ?>">
             <i class="icon left arrow"></i>
         </a>
         <?php
@@ -17,12 +17,12 @@
         foreach ($this->pagesInRange as $page) {
             $this->params['page'] = $page;
             if ($page == $this->current) { ?>
-            <a href="<?php echo $this->url($this->params, 'index_action_pager') ?>" class="active item">
+            <a href="<?php echo $this->url($this->params, $this->routes['index_pager']) ?>" class="active item">
                 <?php echo $page ?>
             </a>
                 <?php
             } else { ?>
-            <a class="item" href="<?php echo $this->url($this->params, 'index_action_pager') ?>"><?php echo $page ?></a>
+            <a class="item" href="<?php echo $this->url($this->params, $this->routes['index_pager']) ?>"><?php echo $page ?></a>
                 <?php
             }
         }
@@ -30,7 +30,7 @@
         if (isset($this->next)) {
             $this->params['page'] = $this->next;
             ?>
-        <a class="icon item" href="<?php echo $this->url($this->params, 'index_action_pager') ?>">
+        <a class="icon item" href="<?php echo $this->url($this->params, $this->routes['index_pager']) ?>">
             <i class="icon right arrow"></i>
         </a>
         <?php } else { ?>

@@ -1,9 +1,9 @@
 <h2 class="ui header">
-    <i class="hdd icon"></i>
+    <i class="<?php echo $this->active_menu['menu_icon_class']; ?> icon"></i>
     <div class="content">
-        Servidores
+        <?php echo $this->active_menu['menu_name']; ?>
         <div class="sub header">
-            Gerenciamento dos servidores Asterisk cadastrados.
+            <?php echo $this->active_menu['menu_description']; ?>
         </div>
     </div>
 </h2>

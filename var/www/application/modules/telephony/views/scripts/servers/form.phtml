@@ -1,6 +1,6 @@
-<?php echo $this->partial('header.phtml') ?>
+<?php echo $this->partial_header ?>
 
-<form action="<?php echo $this->activeSaveAction ?>" method="post" class="ui fluid form segment">
+<form action="<?php echo $this->actions['save'] ?>" method="post" class="ui fluid form segment">
     <?php if(!is_null($this->server)) { ?>
     <input type="hidden" id="server_id" name="server_id" value="<?php echo $this->server['server_id'] ?>">
     <?php } ?>
@@ -49,7 +49,7 @@
     <div class="ui green labeled icon button submit">
         <i class="save icon"></i> Salvar
     </div>
-    <a href="<?php echo $this->activeIndexAction ?>" class="ui red labeled icon button">
+    <a href="<?php echo $this->actions['index'] ?>" class="ui red labeled icon button">
         <i class="reply mail icon"></i> Cancelar
     </a>
 </form>

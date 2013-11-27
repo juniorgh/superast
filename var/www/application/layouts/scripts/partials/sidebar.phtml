@@ -1,52 +1,40 @@
-<div class="ui left sidebar vertical menu red" id="sidebar_aplicacoes">
+<?php
+foreach($this->menu as $menu) {
+    if(!empty($menu['menu_data_target'])) {
+ ?>
+<div class="ui left sidebar vertical menu red" id="<?php echo str_replace('#', '', $menu['menu_data_target']) ?>">
     <div class="item header">
-        <i class="grid layout icon"></i> Aplicações
+        <i class="<?php echo $menu['menu_icon_class'] ?> icon"></i> <?php echo $menu['menu_name'] ?>
     </div>
-    <div class="item active">
-        <i class="suitcase icon"></i> <b>CRM</b>
-        <div class="menu">
-            <a class="item active">Clientes</a>
-            <a class="item">Atendimentos</a>
-            <a class="item">Meus agendamentos</a>
-            <a class="item">Relatórios</a>
-        </div>
-    </div>
-    <div class="item">
-        <i class="phone icon"></i> <b>Telefonia</b>
-        <div class="menu">
-            <a href="<?php echo $this->url(array('module' => 'telephony', 'controller' => 'servers', 'action' => 'index'), 'index_action', true) ?>" class="item">Servidores</a>
-            <a class="item">Filas e Ramais</a>
-            <a class="item">Campanhas</a>
-            <a class="item">Monitoramento</a>
-            <a class="item">Relatório de chamadas</a>
-        </div>
-    </div>
-    <div class="item">
-        <i class="money icon"></i> <b>Tarifação</b>
-        <div class="menu">
-            <a class="item">Operadoras</a>
-            <a class="item">Relatórios</a>
-        </div>
-    </div>
-</div>
+    <?php
+    if(array_key_exists('childs', $menu)) {
+        foreach($menu['childs'] as $childs1) {
+            if(array_key_exists('childs', $childs1)) {
+                ?>
+                <div class="item<?php echo array_key_exists('menu_active', $childs1) ? " active" : "" ?>">
+                    <i class="<?php echo $childs1['menu_icon_class'] ?> icon"></i> <b><?php echo $childs1['menu_name'] ?></b>
+                    <div class="menu">
+                        <?php foreach($childs1['childs'] as $childs2) {
+                            $url = $this->url(array(
+                                    'module' => $childs2['menu_module'],
+                                    'controller' => $childs2['menu_controller'],
+                                    'action' => $childs2['menu_action']
+                                ), $childs2['menu_route']
+                            );
+                            ?>
+                        <a href="<?php echo $url ?>" class="item<?php echo array_key_exists('menu_active', $childs2) ? " active" : "" ?>"><?php echo $childs2['menu_name'] ?></a>
+                        <?php } ?>
+                    </div>
+                </div>
+                <?php
+            }
+        }
+    } else { ?>
 
-<div class="ui left sidebar vertical menu red" id="sidebar_configuracoes">
-    <div class="item header">
-        <i class="user icon"></i> Configurações
-    </div>
-    <div class="item">
-        <i class="building icon"></i> <b>Empresas</b>
-        <div class="menu">
-            <a class="item">Empresas</a>
-            <a class="item">Grupos</a>
-            <a class="item">Usuários</a>
-        </div>
-    </div>
-    <div class="item">
-        <i class="reorder icon"></i> <b>Menus</b>
-        <div class="menu">
-            <a class="item">Menus</a>
-            <a class="item">Acessos</a>
-        </div>
-    </div>
+    <?php } ?>
 </div>
+<?php 
+    }
+}
+
+?>

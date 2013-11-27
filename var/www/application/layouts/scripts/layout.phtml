@@ -9,8 +9,7 @@
     <?php echo $this->headLink() . PHP_EOL ?>
 </head>
 <body class="ui transition hidden">
-    <?php echo $this->partial('partials/navigation.phtml', array("menu" => $this->menus)) ?>
-
+    <?php echo $this->partial_navigation ?>
     <div id="app_wrapper" class="ui grid">
         <div class="row">
             <div class="column">
@@ -18,8 +17,7 @@
             </div>
         </div>
     </div>
-
-    <?php echo $this->partial('partials/sidebar.phtml', array("menu", $this->menus)) ?>
+    <?php echo $this->partial_sidebar ?>
     <?php echo $this->headScript(); ?>
 </body>
 </html>

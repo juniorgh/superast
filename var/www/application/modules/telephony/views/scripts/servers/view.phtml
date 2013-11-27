@@ -1,4 +1,4 @@
-<?php echo $this->partial('header.phtml'); ?>
+<?php echo $this->partial_header; ?>
 <div id="view_wrapper">
     <div class="ui top red attached segment">
         <h4 class="ui header">
@@ -70,7 +70,7 @@
         </div>
     </div>
     <div class="ui bottom attached segment">
-        <a href="<?php echo $this->activeIndexAction ?>" class="ui red labeled icon button">
+        <a href="<?php echo $this->actions['index'] ?>" class="ui red labeled icon button">
             <i class="reply mail icon"></i> Voltar
         </a>
         

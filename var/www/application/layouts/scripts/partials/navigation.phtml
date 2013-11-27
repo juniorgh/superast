@@ -1,14 +1,31 @@
 <div id="app_navigation" class="ui six column divided grid">
     <div class="ui menu red">
-        <a href="<?php echo $this->baseUrl() ?>" class="active item red page-active">
-            <i class="dashboard icon"></i> Dashboard
+        <?php foreach($this->menu as $menu) {
+            if(!empty($menu['menu_data_target'])) {
+                $target = ' data-target="' . $menu['menu_data_target'] . '" data-toggle="sidebar"';
+            } else {
+                $url = $this->url(array(
+                    'module' => $menu['menu_module'],
+                    'controller' => $menu['menu_controller'],
+                    'action' => $menu['menu_action']
+                    ), $menu['menu_route']
+                );
+
+                $target = ' href="' . $url . '"';
+            }
+
+            if(array_key_exists('menu_active', $menu)) {
+                $active = "active ";
+                $page_active = " page-active";
+            } else {
+                $active = "";
+                $page_active = "";
+            }
+            ?>
+        <a<?php echo $target ?> class="<?php echo $active ?>item red<?php echo $page_active?>">
+            <i class="<?php echo $menu['menu_icon_class'] ?> icon"></i> <?php echo $menu['menu_name'] ?>
         </a>
-        <a data-target="#sidebar_aplicacoes" data-toggle="sidebar" class="item red">
-            <i class="grid layout icon"></i> Aplicações
-        </a>
-        <a data-target="#sidebar_configuracoes" data-toggle="sidebar" class="item red">
-            <i class="settings icon"></i> Configurações
-        </a>
+        <?php } ?>
         <div class="right menu">
             <div class="item">
                 <div class="ui icon input">

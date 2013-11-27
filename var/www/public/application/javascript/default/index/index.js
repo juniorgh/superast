@@ -55,6 +55,4 @@ $(document).ready(function(){
       }
     });
 
-    $('.ui.sidebar').sidebar('setting', 'onShow', function() {}); /* incluindo callbacks para a sidebar */
-
 });

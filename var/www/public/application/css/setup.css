@@ -44,6 +44,7 @@ body {
 .cell.action {
     text-align: center !important;
     width: 15%;
+    min-width: 165px;
 }
 
 #app_wrapper #paginator > div {

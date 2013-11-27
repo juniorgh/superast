@@ -28,12 +28,52 @@
               <actionMethod actionName="index"/>
               <actionMethod actionName="error"/>
             </controllerFile>
+            <controllerFile controllerName="Menus">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="view"/>
+              <actionMethod actionName="save"/>
+              <actionMethod actionName="drop"/>
+              <actionMethod actionName="form"/>
+            </controllerFile>
+            <controllerFile controllerName="Users">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="view"/>
+              <actionMethod actionName="save"/>
+              <actionMethod actionName="drop"/>
+              <actionMethod actionName="form"/>
+            </controllerFile>
+            <controllerFile controllerName="Groups">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="view"/>
+              <actionMethod actionName="save"/>
+              <actionMethod actionName="drop"/>
+              <actionMethod actionName="form"/>
+            </controllerFile>
+            <controllerFile controllerName="Companies">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="view"/>
+              <actionMethod actionName="save"/>
+              <actionMethod actionName="drop"/>
+              <actionMethod actionName="form"/>
+            </controllerFile>
+            <controllerFile controllerName="Authentication">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="login"/>
+              <actionMethod actionName="logout"/>
+            </controllerFile>
           </controllersDirectory>
           <formsDirectory>
             <formFile formName="Autenticacao"/>
           </formsDirectory>
           <layoutsDirectory enabled="false"/>
-          <modelsDirectory/>
+          <modelsDirectory>
+            <dbTableDirectory>
+              <dbTableFile dbTableName="Company"/>
+              <dbTableFile dbTableName="Menu"/>
+            </dbTableDirectory>
+            <modelFile modelName="Company"/>
+            <modelFile modelName="Menu"/>
+          </modelsDirectory>
           <viewsDirectory>
             <viewScriptsDirectory>
               <viewControllerScriptsDirectory forControllerName="Index">
@@ -44,6 +84,75 @@
               </viewControllerScriptsDirectory>
               <viewControllerScriptsDirectory forControllerName="Error">
                 <viewScriptFile forActionName="error"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Menus">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Users">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Groups">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Companies">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Companies">
+                <viewScriptFile forActionName="view"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Companies">
+                <viewScriptFile forActionName="save"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Companies">
+                <viewScriptFile forActionName="drop"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Companies">
+                <viewScriptFile forActionName="form"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Groups">
+                <viewScriptFile forActionName="view"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Groups">
+                <viewScriptFile forActionName="save"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Groups">
+                <viewScriptFile forActionName="drop"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Groups">
+                <viewScriptFile forActionName="form"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Menus">
+                <viewScriptFile forActionName="view"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Menus">
+                <viewScriptFile forActionName="save"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Menus">
+                <viewScriptFile forActionName="drop"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Menus">
+                <viewScriptFile forActionName="form"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Users">
+                <viewScriptFile forActionName="view"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Users">
+                <viewScriptFile forActionName="save"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Users">
+                <viewScriptFile forActionName="drop"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Users">
+                <viewScriptFile forActionName="form"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Authentication">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Authentication">
+                <viewScriptFile forActionName="login"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Authentication">
+                <viewScriptFile forActionName="logout"/>
               </viewControllerScriptsDirectory>
             </viewScriptsDirectory>
             <viewHelpersDirectory/>
@@ -190,6 +299,11 @@
           <testApplicationControllerFile filesystemName="CampaignsControllerTest.php"/>
           <testApplicationControllerFile filesystemName="MonitoringControllerTest.php"/>
           <testApplicationControllerFile filesystemName="ReportCallsControllerTest.php"/>
+          <testApplicationControllerFile filesystemName="MenusControllerTest.php"/>
+          <testApplicationControllerFile filesystemName="UsersControllerTest.php"/>
+          <testApplicationControllerFile filesystemName="GroupsControllerTest.php"/>
+          <testApplicationControllerFile filesystemName="CompaniesControllerTest.php"/>
+          <testApplicationControllerFile filesystemName="AuthenticationControllerTest.php"/>
         </testApplicationControllerDirectory>
       </testApplicationDirectory>
       <testLibraryDirectory>
