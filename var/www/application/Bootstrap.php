@@ -39,12 +39,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
      */
     protected function _initAutoload() {
         new Zend_Application_Module_Autoloader(array(
-            'basePath' => APPLICATION_PATH.'/modules/default/',
+            'basePath' => APPLICATION_PATH . '/modules/default/',
             'namespace' => 'Default'
         ));
 
         new Zend_Application_Module_Autoloader(array(
-            'basePath' => APPLICATION_PATH.'/modules/telephony/',
+            'basePath' => APPLICATION_PATH . '/modules/telephony/',
             'namespace' => 'Telephony'
         ));
     }
