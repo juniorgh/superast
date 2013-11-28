@@ -1,1 +1,98 @@
-<br /><br /><center>View script for controller <b>Users</b> and script/action name <b>form</b></center>
+<?php echo $this->partial_header ?>
+
+<form action="<?php echo $this->actions['save'] ?>" method="post" class="ui fluid form segment">
+    <?php if(!is_null($this->user)) { ?>
+    <input type="hidden" id="user_id" name="user_id" value="<?php echo $this->user['user_id'] ?>">
+    <?php } ?>
+    <div class="three fields">
+        <div class="field">
+            <label for="user_name">Nome</label>
+            <input id="user_name" name="user_name" value="<?php echo $this->user["user_name"]?>" placeholder="Nome do usuário" type="text">
+        </div>
+        <div class="field">
+            <label for="user_email">Email</label>
+            <input id="user_email" name="user_email" value="<?php echo $this->user["user_email"]?>" placeholder="Email de contato do usuário" type="text">
+        </div>
+        <div class="field">
+            <label for="user_role">Cargo</label>
+            <div class="ui selection dropdown">
+                <input type="hidden" name="user_role" id="user_role" value="<?php echo isset($this->user["user_role"]) ? $this->user["user_role"] : "selecione" ?>">
+                <div class="text"></div>
+                <i class="dropdown icon"></i>
+                <div class="menu ui transition hidden">
+                    <div class="item" data-value="selecione">Selecione</div>
+                    <?php foreach($this->roles as $role) { ?> 
+                    <div class="item" data-value="<?php echo $role['role_id'] ?>"><?php echo $role['role_name'] ?></div>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="three fields">
+        <div class="field">
+            <label for="user_login">Login</label>
+            <input id="user_login" name="user_login" value="<?php echo $this->user["user_login"]?>" placeholder="Login de acesso do usuário" type="text">
+        </div>
+        <div class="field">
+            <label for="user_password">Senha</label>
+            <input id="user_password" name="user_password" placeholder="Senha de acesso do usuário" type="password">
+        </div>
+        <div class="field">
+            <label for="user_password_confirm">Confirme a senha</label>
+            <input id="user_password_confirm" name="user_password_confirm" placeholder="Confirme a senha de acesso do usuário" type="password">
+        </div>
+    </div>
+
+    <div class="field">
+        <label for="group_menu">Empresas</label>
+    </div>
+
+    <?php
+    $i = 0;
+    foreach($this->companies as $company) {
+        $i++;
+        if(($i % 3) === 1) { ?>
+        <div class="three fields">
+        <?php } ?>
+            <div class="field">
+                <div class="ui checkbox menu_checkbox">
+                    <input type="checkbox" name="user_company[]" value="<?php echo $company['company_id'] ?>"<?php echo in_array($company['company_id'], $this->company_added) ? " checked" : "" ?>>
+                    <label><?php echo $company['company_name']; ?></label>
+                </div>
+            </div>
+        <?php if(($i % 3) === 0 || $i == count($this->companies)) { ?>
+        </div>
+        <?php } ?>
+    <?php } ?>
+
+    <div class="field">
+        <label for="group_menu">Grupos</label>
+    </div>
+
+    <?php
+    $i = 0;
+    foreach($this->groups as $group) {
+        $i++;
+        if(($i % 3) === 1) { ?>
+        <div class="three fields">
+        <?php } ?>
+            <div class="field">
+                <div class="ui checkbox menu_checkbox">
+                    <input type="checkbox" name="user_group[]" value="<?php echo $group['group_id'] ?>"<?php echo in_array($group['group_id'], $this->group_added) ? " checked" : "" ?>>
+                    <label><?php echo $group['group_name']; ?></label>
+                </div>
+            </div>
+        <?php if(($i % 3) === 0 || $i == count($this->groups)) { ?>
+        </div>
+        <?php } ?>
+    <?php } ?>
+
+    <div class="ui divider"></div>
+
+    <div class="ui green labeled icon button submit">
+        <i class="save icon"></i> Salvar
+    </div>
+    <a href="<?php echo $this->actions['index'] ?>" class="ui red labeled icon button">
+        <i class="reply mail icon"></i> Cancelar
+    </a>
+</form>

@@ -1,1 +1,88 @@
-<br /><br /><center>View script for controller <b>Users</b> and script/action name <b>view</b></center>
+<?php echo $this->partial_header; ?>
+
+<div id="view_wrapper">
+    <div class="ui top red attached segment">
+        <h4 class="ui header">
+            Visualizando usuário <?php echo $this->user['user_name'] ?>
+        </h4>
+    </div>
+    <div class="ui attached segment">
+        <div class="ui three column grid">
+            <div class="column">
+                <b>Nome</b>
+            </div>
+            <div class="column">
+                <?php echo $this->user['user_name']; ?>
+            </div>
+        </div>
+    </div>
+    
+    <div class="ui attached segment">
+        <div class="ui three column grid">
+            <div class="column">
+                <b>Email</b>
+            </div>
+            <div class="column">
+                <?php echo $this->user['user_email']; ?>
+            </div>
+        </div>
+    </div>
+    
+    <div class="ui attached segment">
+        <div class="ui three column grid">
+            <div class="column">
+                <b>Login</b>
+            </div>
+            <div class="column">
+                <?php echo $this->user['user_login']; ?>
+            </div>
+        </div>
+    </div>
+    
+    <div class="ui attached segment">
+        <div class="ui three column grid">
+            <div class="column">
+                <b>Cargo</b>
+            </div>
+            <div class="column">
+                <?php echo $this->user['role_name']; ?>
+            </div>
+        </div>
+    </div>
+    
+    <div class="ui attached segment">
+        <div class="ui three column grid">
+            <div class="column">
+                <b>Empresas</b>
+            </div>
+            <div class="column">
+                <?php foreach($this->companies as $company) { ?>
+                <?php echo $company['company_name'] ?><br>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+    
+    <div class="ui attached segment">
+        <div class="ui three column grid">
+            <div class="column">
+                <b>Grupos</b>
+            </div>
+            <div class="column">
+                <?php foreach($this->groups as $group) { ?>
+                <?php echo $group['group_name'] ?><br>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui bottom attached segment">
+        <a href="<?php echo $this->actions['index'] ?>" class="ui red labeled icon button">
+            <i class="reply mail icon"></i> Voltar
+        </a>
+        
+        <a href="<?php echo $this->url(array('module' => $this->moduleName, 'controller' => $this->controllerName, 'action' => 'edit', 'id' => $this->user['user_id']), $this->routes['edit'], true) ?>" class="ui blue labeled icon button">
+            <i class="edit icon"></i> Editar
+        </a>
+    </div>
+</div>
