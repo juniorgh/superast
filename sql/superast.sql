@@ -69,8 +69,8 @@ CREATE TABLE `user` (
     `user_active` TINYINT(1) DEFAULT 1
 )  ENGINE=InnoDB AUTO_INCREMENT=2;
 
-INSERT INTO `user` (`user_id`, `user_name`, `user_login`, `user_password`, `user_role`, `user_company`, `user_active`) VALUES
-(1, 'William Urbano', 'william', MD5(123), 1, 1, 1);
+INSERT INTO `user` (`user_id`, `user_name`, `user_login`, `user_password`, `user_role`, `user_active`) VALUES
+(1, 'William Urbano', 'william', MD5(123), 1, 1);
 
 CREATE TABLE `group` (
     `group_id` INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -95,6 +95,12 @@ CREATE TABLE `group_menu` (
     `group_menu_id` INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `group_menu_group` INT(10) UNSIGNED NOT NULL,
     `group_menu_menu` INT(10) UNSIGNED NOT NULL
+)  ENGINE=InnoDB;
+
+CREATE TABLE `user_company` (
+    `user_company_id` INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `user_company_user` INT(10) UNSIGNED NOT NULL,
+    `user_company_company` INT(10) UNSIGNED NOT NULL
 )  ENGINE=InnoDB;
 
 CREATE TABLE `server` (
@@ -125,3 +131,7 @@ ADD CONSTRAINT `fk_user_group_group` FOREIGN KEY (`user_group_group`) REFERENCES
 ALTER TABLE `group_menu`
 ADD CONSTRAINT `fk_group_menu_group` FOREIGN KEY (`group_menu_group`) REFERENCES `group`(`group_id`) ON UPDATE CASCADE ON DELETE CASCADE,
 ADD CONSTRAINT `fk_group_menu_menu` FOREIGN KEY (`group_menu_menu`) REFERENCES `menu`(`menu_id`) ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE `user_company`
+ADD CONSTRAINT `fk_user_company_user` FOREIGN KEY (`user_company_user`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE ON DELETE CASCADE,
+ADD CONSTRAINT `fk_user_company_company` FOREIGN KEY (`user_company_company`) REFERENCES `company`(`company_id`) ON UPDATE CASCADE ON DELETE CASCADE;
