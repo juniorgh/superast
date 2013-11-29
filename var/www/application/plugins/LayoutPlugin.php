@@ -104,6 +104,8 @@ class Application_Plugin_LayoutPlugin extends Zend_Controller_Plugin_Abstract {
         if($request->getControllerName() != "authentication") {
             $usuario = Zend_Auth::getInstance()->getIdentity();
 
+            $exp = array(null);
+
             $menus = Superast_Utils_MenuIterator::findActive($usuario['menus'], $request->getModuleName(), $request->getControllerName());
             $menus = Superast_Utils_MenuIterator::makeActiveHierarchy($menus);
             $active_node = Superast_Utils_MenuIterator::getActiveNode($menus);
@@ -112,17 +114,19 @@ class Application_Plugin_LayoutPlugin extends Zend_Controller_Plugin_Abstract {
 
             $actions = array('index' => '', 'add' => '', 'save' => '');
 
-            foreach($actions as $k => $v) {
-                $varname = sprintf('active%sAction', ucfirst($k));
-                $route = str_replace('index', $k, $active['menu_route']);
-                $actions[$k] = $view->url(array(
-                        'module' => $request->getModuleName(),
-                        'controller' => $request->getControllerName(),
-                        'action' => $k
-                    ), $route, true);
-            }
+            if(count($active) > 0) {
+                foreach($actions as $k => $v) {
+                    $varname = sprintf('active%sAction', ucfirst($k));
+                    $route = str_replace('index', $k, $active['menu_route']);
+                    $actions[$k] = $view->url(array(
+                            'module' => $request->getModuleName(),
+                            'controller' => $request->getControllerName(),
+                            'action' => $k
+                        ), $route, true);
+                }
 
-            $exp = explode('_', $active['menu_route']);
+                $exp = explode('_', $active['menu_route']);
+            }
 
             $route_prefix = $exp[0] != "index" ? $exp[0] . "_" : "";
 
@@ -169,7 +173,7 @@ class Application_Plugin_LayoutPlugin extends Zend_Controller_Plugin_Abstract {
      * @return void
      */
     public function postDispatch(Zend_Controller_Request_Abstract $request) {
-
+        
     }
  
     /**

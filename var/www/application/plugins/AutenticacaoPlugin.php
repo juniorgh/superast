@@ -40,18 +40,20 @@ class Application_Plugin_AutenticacaoPlugin extends Zend_Controller_Plugin_Abstr
      * @return void
      */
     public function dispatchLoopStartup(Zend_Controller_Request_Abstract $request) {
-        if(!Zend_Auth::getInstance()->hasIdentity() && $request->getControllerName() != "authentication") {
-            $view = new Zend_View();
-            $url = $view->url(array('module' => 'default', 'controller' => 'authentication', 'action' => 'index'), 'authentication_index');
-            $redirector = new Zend_Controller_Action_Helper_Redirector;
-            $redirector->gotoUrl($url)->redirectAndExit();
-        }
+        if($request->getHeader('referer') != 'console@localhost') {
+            if(!Zend_Auth::getInstance()->hasIdentity() && $request->getControllerName() != "authentication") {
+                $view = new Zend_View();
+                $url = $view->url(array('module' => 'default', 'controller' => 'authentication', 'action' => 'index'), 'authentication_index');
+                $redirector = new Zend_Controller_Action_Helper_Redirector;
+                $redirector->gotoUrl($url)->redirectAndExit();
+            }
 
-        if(Zend_Auth::getInstance()->hasIdentity() && $request->getControllerName() == "authentication" && $request->getActionName() == "index") {
-            $view = new Zend_View();
-            $url = $view->url(array('module' => 'dashboard'), 'dashboard_action');
-            $redirector = new Zend_Controller_Action_Helper_Redirector;
-            $redirector->gotoUrl($url)->redirectAndExit();
+            if(Zend_Auth::getInstance()->hasIdentity() && $request->getControllerName() == "authentication" && $request->getActionName() == "index") {
+                $view = new Zend_View();
+                $url = $view->url(array('module' => 'dashboard'), 'dashboard_action');
+                $redirector = new Zend_Controller_Action_Helper_Redirector;
+                $redirector->gotoUrl($url)->redirectAndExit();
+            }
         }
     }
  

@@ -121,25 +121,29 @@ class Superast_Utils_MenuIterator {
     }
 
     public static function getPagesTitle($active) {
-        $names = array();
-        $names[] = !empty($active['menu_page_title']) ? $active['menu_page_title'] : $active['menu_name'];
-        if(array_key_exists('childs', $active)) {
-            $names[] = !empty($active['childs']['menu_page_title']) ? $active['childs']['menu_page_title'] : $active['childs']['menu_name'];
-            if(array_key_exists('childs', $active['childs'])) {
-                $names[] = !empty($active['childs']['childs']['menu_page_title']) ? $active['childs']['childs']['menu_page_title'] : $active['childs']['childs']['menu_name'];
+        if(count($active) > 0) {
+            $names = array();
+            $names[] = !empty($active['menu_page_title']) ? $active['menu_page_title'] : $active['menu_name'];
+            if(array_key_exists('childs', $active)) {
+                $names[] = !empty($active['childs']['menu_page_title']) ? $active['childs']['menu_page_title'] : $active['childs']['menu_name'];
+                if(array_key_exists('childs', $active['childs'])) {
+                    $names[] = !empty($active['childs']['childs']['menu_page_title']) ? $active['childs']['childs']['menu_page_title'] : $active['childs']['childs']['menu_name'];
+                }
             }
-        }
 
-        $first = array_shift($names);
-        if(count($names) > 0) {
-            $last = array_pop($names);
-            unset($names);
-            $names = array($first, $last);
+            $first = array_shift($names);
+            if(count($names) > 0) {
+                $last = array_pop($names);
+                unset($names);
+                $names = array($first, $last);
+            } else {
+                $names = array($first);
+            }
+
+            return $names;
         } else {
-            $names = array($first);
+            return $active;
         }
-
-        return $names;
     }
 
 }

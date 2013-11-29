@@ -267,6 +267,39 @@
             <viewFiltersDirectory/>
           </viewsDirectory>
         </moduleDirectory>
+        <moduleDirectory moduleName="elastix">
+          <apisDirectory enabled="false"/>
+          <configsDirectory enabled="false"/>
+          <controllersDirectory>
+            <controllerFile controllerName="Queues">
+              <actionMethod actionName="index"/>
+            </controllerFile>
+            <controllerFile controllerName="Extensions">
+              <actionMethod actionName="index"/>
+            </controllerFile>
+            <controllerFile controllerName="Index">
+              <actionMethod actionName="index"/>
+            </controllerFile>
+          </controllersDirectory>
+          <formsDirectory enabled="false"/>
+          <layoutsDirectory enabled="false"/>
+          <modelsDirectory/>
+          <viewsDirectory>
+            <viewScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Queues">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Extensions">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Index">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+            </viewScriptsDirectory>
+            <viewHelpersDirectory/>
+            <viewFiltersDirectory/>
+          </viewsDirectory>
+        </moduleDirectory>
       </modulesDirectory>
       <viewsDirectory>
         <viewScriptsDirectory>
@@ -324,6 +357,9 @@
           <testApplicationControllerFile filesystemName="CompaniesControllerTest.php"/>
           <testApplicationControllerFile filesystemName="AuthenticationControllerTest.php"/>
           <testApplicationControllerFile filesystemName="RolesControllerTest.php"/>
+          <testApplicationControllerFile filesystemName="QueuesControllerTest.php"/>
+          <testApplicationControllerFile filesystemName="ExtensionsControllerTest.php"/>
+          <testApplicationControllerFile filesystemName="IndexControllerTest.php"/>
         </testApplicationControllerDirectory>
       </testApplicationDirectory>
       <testLibraryDirectory>

@@ -3,6 +3,7 @@
 class Telephony_ServersController extends Zend_Controller_Action {
 
     public function indexAction() {
+        $dbSync = new Superast_Elastix_DatabaseSync();
         $where = null;
         $order = null;
         $request = $this->getRequest();
