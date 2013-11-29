@@ -1,0 +1,46 @@
+<!DOCTYPE html><html>
+<head>
+    <title>Autenticação</title>
+    <!-- Exibindo as meta tags -->
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+<meta http-equiv="viewport" content="width=device-width, initial-scale=1.0" >
+    <base href="/">
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700' rel='stylesheet' type='text/css'>
+    <link href="assets/css/semantic.min.css" media="all" rel="stylesheet" type="text/css" >
+<link href="application/css/setup.css" media="all" rel="stylesheet" type="text/css" >
+<link href="application/vendor/jqplot/jquery.jqplot.min.css" media="all" rel="stylesheet" type="text/css" >
+</head>
+<body class="ui transition hidden">
+    <div class="ui middle aligned three column grid">
+    <div class="row">
+        <div class="column"></div>
+        <div class="column">
+            <form action="/authentication/login" class="ui form segment" style="margin-top: 100px" method="post">
+                                <div class="field">
+                    <label>Usuário</label>
+                    <div class="ui left icon input">
+                        <input type="text" placeholder="Usuário" name="user_login">
+                        <i class="user icon"></i>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Senha</label>
+                    <div class="ui left icon input">
+                        <input type="password" placeholder="Senha" name="user_password">
+                        <i class="lock icon"></i>
+                    </div>
+                </div>
+                <div class="ui blue submit button">Login</div>
+            </form>
+        </div>
+        <div class="column"></div>
+    </div>
+</div>    <script type="text/javascript" src="assets/javascript/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="assets/javascript/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="assets/javascript/semantic.min.js"></script>
+<script type="text/javascript" src="application/javascript/setup.js"></script>
+<script type="text/javascript" src="application/vendor/jqplot/jquery.jqplot.min.js"></script>
+<script type="text/javascript" src="application/vendor/jqplot/plugins/jqplot.pieRenderer.min.js"></script>
+<script type="text/javascript" src="application/javascript/default/authentication/index.js"></script></body>
+</html>
