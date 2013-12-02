@@ -26,7 +26,7 @@ class Default_Model_Company {
             }
 
             if($pager == false) {
-                return $company->fetchAll($query);
+                return $company->fetchAll($query)->toArray();
             } else {
                 return $query;
             }

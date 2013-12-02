@@ -26,7 +26,7 @@ class Default_Model_Role {
             }
 
             if($pager == false) {
-                return $role->fetchAll($query);
+                return $role->fetchAll($query)->toArray();
             } else {
                 return $query;
             }

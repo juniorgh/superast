@@ -24,7 +24,7 @@ class Default_Model_UserCompany {
             }
 
             if($pager == false) {
-                return $user_company->fetchAll($query);
+                return $user_company->fetchAll($query)->toArray();
             } else {
                 return $query;
             }

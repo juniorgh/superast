@@ -34,7 +34,7 @@ class Default_Model_User {
             }
 
             if($pager == false) {
-                return $user->fetchAll($query);
+                return $user->fetchAll($query)->toArray();
             } else {
                 return $query;
             }
