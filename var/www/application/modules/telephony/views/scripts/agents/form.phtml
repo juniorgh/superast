@@ -1,1 +1,84 @@
-<br /><br /><center>View script for controller <b>Agents</b> and script/action name <b>form</b></center>
+<?php echo $this->partial_header ?>
+
+<form action="<?php echo $this->actions['save'] ?>" method="post" class="ui fluid form segment">
+    <?php if(!is_null($this->agent)) { ?>
+    <input type="hidden" id="agent_id" name="agent_id" value="<?php echo $this->agent['agent_id'] ?>">
+    <?php } ?>
+    <div class="two fields">
+        <div class="<?php echo $this->disabled ?>field">
+            <label for="agent_name">Nome</label>
+            <input id="agent_name" name="agent_name" value="<?php echo $this->agent["agent_name"]?>" placeholder="Nome do agente" type="text"<?php echo $this->disabled ?>>
+        </div>
+
+        <div class="<?php echo $this->disabled ?>field">
+            <label for="agent_number">Nome</label>
+            <input id="agent_number" name="agent_number" value="<?php echo $this->agent["agent_number"]?>" placeholder="Número do agente" type="text"<?php echo $this->disabled ?>>
+        </div>
+    </div>
+
+    <div class="two fields">
+        <div class="<?php echo $this->disabled ?>field">
+            <label for="agent_name">Senha</label>
+            <input id="agent_name" name="agent_name" placeholder="Senha do agente" type="password"<?php echo $this->disabled ?>>
+        </div>
+
+        <div class="<?php echo $this->disabled ?>field">
+            <label for="agent_name">Confirme a senha</label>
+            <input id="agent_name" name="agent_name" placeholder="Confirme a senha do agente" type="password"<?php echo $this->disabled ?>>
+        </div>
+    </div>
+
+    <div class="three fields">
+        <div class="<?php echo $this->disabled ?>field">
+            <label for="agent_server">Servidor</label>
+            <div class="ui selection <?php echo $this->disabled ?> dropdown">
+                <input type="hidden" name="agent_server" id="agent_server" value="<?php echo (int) $this->agent["agent_server"] == 0 ? "selecione" : $this->agent["agent_server"] ?>"<?php echo $this->disabled ?>>
+                <div class="text"></div>
+                <i class="dropdown icon"></i>
+                <div class="menu ui transition hidden <?php echo $this->disabled ?>">
+                    <div class="item" data-value="selecione">Selecione</div>
+                    <?php foreach($this->servers as $server) { ?>
+                    <div class="item" data-value="<?php echo $server['server_id'] ?>"><?php echo $server['server_hostname'] ?></div>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label for="agent_company">Empresa</label>
+            <div class="ui selection dropdown">
+                <input type="hidden" name="agent_company" id="agent_company" value="<?php echo (int) $this->agent["agent_company"] == 0 ? "selecione" : $this->agent["agent_company"] ?>">
+                <div class="text"></div>
+                <i class="dropdown icon"></i>
+                <div class="menu ui transition hidden">
+                    <div class="item" data-value="selecione">Selecione</div>
+                    <?php foreach($this->companies as $company) { ?>
+                    <div class="item" data-value="<?php echo $company['company_id'] ?>"><?php echo $company['company_name'] ?></div>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label for="agent_user">Usuário</label>
+            <div class="ui selection dropdown">
+                <input type="hidden" name="agent_user" id="agent_user" value="<?php echo (int) $this->agent["agent_user"] == 0 ? "selecione" : $this->agent["agent_user"] ?>">
+                <div class="text"></div>
+                <i class="dropdown icon"></i>
+                <div class="menu ui transition hidden">
+                    <div class="item" data-value="selecione">Selecione</div>
+                    <?php foreach($this->users as $user) { ?>
+                    <div class="item" data-value="<?php echo $user['user_id'] ?>"><?php echo $user['user_name'] ?></div>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui green labeled icon button submit">
+        <i class="save icon"></i> Salvar
+    </div>
+    <a href="<?php echo $this->actions['index'] ?>" class="ui red labeled icon button">
+        <i class="reply mail icon"></i> Cancelar
+    </a>
+</form>

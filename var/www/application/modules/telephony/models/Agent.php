@@ -48,6 +48,7 @@ class Telephony_Model_Agent {
         }
 
         if(!is_null($id)) {
+            $query->where('agent_id = ?', $id);
             return $agent->fetchRow($query);
         } else {
             if(!is_null($where)) {

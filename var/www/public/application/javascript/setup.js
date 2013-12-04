@@ -32,6 +32,10 @@ $(document).ready(function() {
     $('.drop.entry').click(function(e) {
         e.preventDefault();
         var href = $(this).attr('href');
+        if($(this).is('.disabled') || $(this).is('[disabled]')) {
+            return false;
+        }
+        
         $('#modal_drop_entry').modal('setting', {
             onApprove: function() {
                 window.location.href = href;

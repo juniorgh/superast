@@ -1,1 +1,123 @@
-<br /><br /><center>View script for controller <b>Agents</b> and script/action name <b>index</b></center>
+<?php echo $this->partial_header; ?>
+
+<form class="ui fluid form segment transition<?php echo !$this->hasFilter ? " hidden" : "" ?>" id="table_filter" method="post">
+    <div class="two fields">
+        <div class="field">
+            <label for="agent_name">Nome</label>
+            <input id="agent_name" name="agent_name" value="<?php echo $this->params["agent_name"]?>" placeholder="Nome do agente" type="text">
+        </div>
+
+        <div class="field">
+            <label for="agent_number">Número</label>
+            <input id="agent_number" name="agent_number" value="<?php echo $this->params["agent_number"]?>" placeholder="Número do agente" type="text">
+        </div>
+    </div>
+
+    <div class="three fields">
+        <div class="field">
+            <label for="agent_server">Servidor</label>
+            <div class="ui selection  dropdown">
+                <input type="hidden" name="agent_server" id="agent_server" value="<?php echo (int) $this->params["agent_server"] == 0 ? "selecione" : $this->params["agent_server"] ?>">
+                <div class="text"></div>
+                <i class="dropdown icon"></i>
+                <div class="menu ui transition hidden ">
+                    <div class="item" data-value="selecione">Selecione</div>
+                    <?php foreach($this->servers as $server) { ?>
+                    <div class="item" data-value="<?php echo $server['server_id'] ?>"><?php echo $server['server_hostname'] ?></div>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label for="agent_company">Empresa</label>
+            <div class="ui selection dropdown">
+                <input type="hidden" name="agent_company" id="agent_company" value="<?php echo (int) $this->params["agent_company"] == 0 ? "selecione" : $this->params["agent_company"] ?>">
+                <div class="text"></div>
+                <i class="dropdown icon"></i>
+                <div class="menu ui transition hidden">
+                    <div class="item" data-value="selecione">Selecione</div>
+                    <?php foreach($this->companies as $company) { ?>
+                    <div class="item" data-value="<?php echo $company['company_id'] ?>"><?php echo $company['company_name'] ?></div>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label for="agent_user">Usuário</label>
+            <div class="ui selection dropdown">
+                <input type="hidden" name="agent_user" id="agent_user" value="<?php echo (int) $this->params["agent_user"] == 0 ? "selecione" : $this->params["agent_user"] ?>">
+                <div class="text"></div>
+                <i class="dropdown icon"></i>
+                <div class="menu ui transition hidden">
+                    <div class="item" data-value="selecione">Selecione</div>
+                    <?php foreach($this->users as $user) { ?>
+                    <div class="item" data-value="<?php echo $user['user_id'] ?>"><?php echo $user['user_name'] ?></div>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ui green labeled icon button submit">
+        <i class="filter icon"></i> Filtrar
+    </div>
+    <a href="<?php echo $this->actions['index'] ?>" class="ui red labeled icon button">
+        <i class="trash icon"></i> Limpar
+    </a>
+</form>
+
+<a href="<?php echo $this->actions['add'] ?>" class="ui orange labeled icon button">
+    <i class="add icon"></i> Novo servidor
+</a>
+
+<div class="ui orange labeled icon button" data-toggle="filter" data-target="#table_filter" data-placement="slide down">
+    <i class="filter icon"></i> Filtros
+</div>
+
+<table class="ui table padded segment">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Número</th>
+            <th>Usuário</th>
+            <th>Empresa</th>
+            <th>Servidor</th>
+            <th class="cell action">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        if(count($this->agents) > 0) {
+            foreach($this->agents as $agent) { ?>
+            <tr>
+                <td><?php echo $agent['agent_name'] ?></td>
+                <td><?php echo $agent['agent_number'] ?></td>
+                <td><?php echo $agent['user_name'] ?></td>
+                <td><?php echo $agent['company_name'] ?></td>
+                <td><?php echo $agent['server_hostname'] ?></td>
+                <td class="cell action">
+                    <a href="<?php echo $this->url(array('module' => $this->moduleName, 'controller' => $this->controllerName, 'action' => 'view', 'id' => $agent['agent_id']), 'view_action') ?>" class="ui icon small teal button haspopup" data-content="Visualizar">
+                        <i class="forward mail icon"></i>
+                    </a>
+                    <a href="<?php echo $this->url(array('module' => $this->moduleName, 'controller' => $this->controllerName, 'action' => 'edit', 'id' => $agent['agent_id']), 'edit_action') ?>" class="ui icon small blue button haspopup" data-content="Editar">
+                        <i class="edit icon"></i>
+                    </a>
+                    <a href="<?php echo $this->url(array('module' => $this->moduleName, 'controller' => $this->controllerName, 'action' => 'drop', 'id' => $agent['agent_id']), 'drop_action') ?>" class="ui icon small red button <?php echo (bool) $agent['server_is_elastix'] ? ' disabled' : '' ?> haspopup drop entry" data-content="Excluir">
+                        <i class="remove icon"></i>
+                    </a>
+                </td>
+            </tr>
+            <?php }
+        } else { ?>
+            <tr>
+                <td colspan="6" class="text center">Nenhum registro encontrado</td>
+            </tr>
+        <?php } ?>
+    </tbody>
+</table>
+
+<?php
+echo $this->paginationControl($this->agents, 'Sliding', 'pagination.phtml', array('params' => $this->params, 'routes' => $this->routes));
+echo $this->partial('modaldropentry.phtml');
+?>
