@@ -1,7 +1,18 @@
 <?php
 
+/** 
+ * Controladora de gerenciamento de menus
+ * @package Default
+ * @category Controller
+ * @author William Urbano <contato@williamurbano.com.br>
+ */
 class Default_MenusController extends Zend_Controller_Action {
 
+    /** 
+     * Ação índice da controladora. Faz a listagem dos registros de acordo com
+     * os filtros passados para a consulta SQL executada pelo Zend_Paginator
+     * @return void
+     */
     public function indexAction() {
         $where = null;
         $order = null;
@@ -87,6 +98,10 @@ class Default_MenusController extends Zend_Controller_Action {
         $this->view->assign('hasFilter', $hasFilter);
     }
 
+    /** 
+     * Visualiza um determinado menu cadastrado
+     * @return void
+     */
     public function viewAction() {
         $id = $this->getRequest()->getParam('id', null);
 
@@ -96,6 +111,10 @@ class Default_MenusController extends Zend_Controller_Action {
         }
     }
 
+    /** 
+     * Cria ou atualiza um novo menu no banco de dados
+     * @return void
+     */
     public function saveAction() {
         $this->_helper->viewRenderer->setNoRender();
         $this->_helper->layout->disableLayout();
@@ -121,6 +140,10 @@ class Default_MenusController extends Zend_Controller_Action {
         }
     }
 
+    /** 
+     * Remove um determinado menu da tabela
+     * @return void
+     */
     public function dropAction() {
         $id = $this->getRequest()->getParam('id', null);
 
@@ -130,6 +153,10 @@ class Default_MenusController extends Zend_Controller_Action {
         }
     }
 
+    /** 
+     * Formulário de criação e edição de menu
+     * @return void
+     */
     public function formAction() {
         $read = Default_Model_Menu::read(null, false, array('menu_parent = 0 OR menu_parent IS NULL'));
 

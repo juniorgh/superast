@@ -1,7 +1,18 @@
 <?php
 
+/** 
+ * Controladora de gerenciamento do controle de usuários
+ * @package Default
+ * @category Controller
+ * @author William Urbano <contato@williamurbano.com.br>
+ */
 class Default_UsersController extends Zend_Controller_Action {
 
+    /** 
+     * Ação índice da controladora. Faz a listagem dos registros de acordo com
+     * os filtros passados para a consulta SQL executada pelo Zend_Paginator
+     * @return void
+     */
     public function indexAction() {
         $where = null;
         $order = null;
@@ -41,6 +52,10 @@ class Default_UsersController extends Zend_Controller_Action {
         $this->view->assign('hasFilter', $hasFilter);
     }
 
+    /** 
+     * Visualiza um determinado usuário cadastrado
+     * @return void
+     */
     public function viewAction() {
         $id = $this->getRequest()->getParam('id', null);
         if(!is_null($id)) {
@@ -58,6 +73,10 @@ class Default_UsersController extends Zend_Controller_Action {
         }
     }
 
+    /** 
+     * Cria ou atualiza um novo usuário no banco de dados
+     * @return void
+     */
     public function saveAction() {
         $this->_helper->viewRenderer->setNoRender();
         $this->_helper->layout->disableLayout();
@@ -106,8 +125,28 @@ class Default_UsersController extends Zend_Controller_Action {
 
     }
 
-    public function dropAction() {}
+    /** 
+     * Altera o status do usuário para inativo
+     * @return void
+     */
+    public function dropAction() {
+        $id = $this->getRequest()->getParam('id', null);
+        if(!is_null($id)) {
+            $data = array(
+                'user_id' => $id,
+                'user_active' => 0
+            );
 
+            Default_Model_User::update($data);
+        }
+
+        $this->_redirect($this->view->actions['index']);
+    }
+
+    /** 
+     * Formulário de criação e edição de usuário
+     * @return void
+     */
     public function formAction() {
         $id = $this->getRequest()->getParam('id', null);
         $company_added = array();

@@ -1,18 +1,16 @@
 <?php
+
 /**
  * Plugin de autenticação de usuários.
- * 
- * @package Application
- * @category Plugin
+ * @package Plugins
+ * @category Controller Plugin
  * @author William D. Urbano <contato@williamurbano.com.br>
- * 
  */
-class Application_Plugin_AutenticacaoPlugin extends Zend_Controller_Plugin_Abstract {
+class Application_Plugin_AuthenticationPlugin extends Zend_Controller_Plugin_Abstract {
 
     /**
      * Método invocado antes da execução da controladora para avaliar
-     * se a requisição está de acordo com as rotas registradas.
-     * 
+     * se a requisição está de acordo com as rotas registradas
      * @param type Zend_Controller_Request_Abstract $request 
      * @return void
      */
@@ -22,8 +20,7 @@ class Application_Plugin_AutenticacaoPlugin extends Zend_Controller_Plugin_Abstr
     
     /**
      * Método invocado após o roteador da aplicação finalizar o
-     * roteamento da requisição.
-     * 
+     * roteamento da requisição
      * @param type Zend_Controller_Request_Abstract $request 
      * @return type
      */
@@ -34,8 +31,7 @@ class Application_Plugin_AutenticacaoPlugin extends Zend_Controller_Plugin_Abstr
     /**
      * Método invocado antes do início do loop de despacho.
      * Verifica se o usuário está autenticado. Se não estiver
-     * o envia para a página de autenticação.
-     * 
+     * o envia para a página de autenticação
      * @param type Zend_Controller_Request_Abstract $request 
      * @return void
      */
@@ -61,8 +57,7 @@ class Application_Plugin_AutenticacaoPlugin extends Zend_Controller_Plugin_Abstr
      * Método invocado antes que uma Action seja executada e despachada.
      * Este método permite verificar o comportamento de filtros. Alterando
      * a requisição e redefinindo seus parâmetros a Action atual pode ser
-     * ignorada e/ou substituída.
-     * 
+     * ignorada e/ou substituída
      * @param type Zend_Controller_Request_Abstract $request 
      * @return void
      */
@@ -73,8 +68,7 @@ class Application_Plugin_AutenticacaoPlugin extends Zend_Controller_Plugin_Abstr
     /**
      * Méodo invocado após a execução de uma Action. Este método permite
      * verificar o comportamento de filtros. Alterando a requisição e redefinindo
-     * seus parâmetros uma nova Action pode ser definida para despacho.
-     * 
+     * seus parâmetros uma nova Action pode ser definida para despacho
      * @param type Zend_Controller_Request_Abstract $request 
      * @return void
      */
@@ -83,8 +77,7 @@ class Application_Plugin_AutenticacaoPlugin extends Zend_Controller_Plugin_Abstr
     }
  
     /**
-     * Método invocado após o fim da execução do loop de despacho.
-     * 
+     * Método invocado após o fim da execução do loop de despacho
      * @return void
      */
     public function dispatchLoopShutdown() {

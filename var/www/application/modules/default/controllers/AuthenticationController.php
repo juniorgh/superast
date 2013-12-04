@@ -1,13 +1,17 @@
 <?php
 
-class Default_AuthenticationController extends Zend_Controller_Action
-{
+/** 
+ * Controladora de autenticação de usuários
+ * @package Default
+ * @category Controller
+ * @author William Urbano <contato@williamurbano.com.br>
+ */
+class Default_AuthenticationController extends Zend_Controller_Action {
 
-    public function init()
-    {
-        /* Initialize action controller here */
-    }
-
+    /** 
+     * Ação índice da controladora que contém o formulário de autenticação.
+     * @return void
+     */
     public function indexAction() {
         $hasError = false;
         if(parent::_getParam('error') == 1) {
@@ -17,6 +21,12 @@ class Default_AuthenticationController extends Zend_Controller_Action
         $this->_helper->layout->setLayout('login');
     }
 
+    /** 
+     * Realiza a autenticação do usuário, busca suas informações e determina as autorizações de acesso.
+     * Se a autenticação for válida, redireciona o usuário para a página inicial. Caso contrário, é
+     * redirecionado para a ação índice.
+     * @return void
+     */
     public function loginAction() {
         try {
             //Desabilita renderização da view
@@ -120,6 +130,10 @@ class Default_AuthenticationController extends Zend_Controller_Action
         }
     }
 
+    /** 
+     * Encerra a sessão do usuário autenticado e o redireciona à ação índice da controladora.
+     * @return void
+     */
     public function logoutAction() {
         $this->_helper->viewRenderer->setNoRender();
         $this->_helper->layout->disableLayout();

@@ -1,18 +1,15 @@
 <?php
+
 /**
- * 
  * Classe que inicializa a aplicação.
- * 
  * @package Application
  * @author William D. Urbano <contato@williamurbano.com.br>
- * 
  */
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
     /**
-     * Inicia as rotas customizadas da aplicação.
-     * 
-     * @return void
+     * Define as rotas customizadas da aplicação
+     * @return Zend_Controller_Router_Rewrite
      */
     protected function _initRoutes() {
         $front = Zend_Controller_Front::getInstance();
@@ -22,43 +19,51 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
     }
 
     /**
-     * Instancia e registra os plugins utilizados pela aplicação.
-     * 
+     * Instancia e registra os plugins utilizados pela aplicação
      * @return void
      */
     protected function _initPlugins() {
         $front = Zend_Controller_Front::getInstance();
         $front->registerPlugin(new Application_Plugin_LayoutPlugin());
-        $front->registerPlugin(new Application_Plugin_AutenticacaoPlugin());
+        $front->registerPlugin(new Application_Plugin_AuthenticationPlugin());
     }
 
     /**
-     * Realiza o autoload de Namespaces da aplicação.
-     * 
-     * @return void
+     * Realiza o autoload de Namespaces da aplicação
+     * @return Zend_Application_Module_Autoloader
      */
     protected function _initAutoload() {
-        new Zend_Application_Module_Autoloader(array(
+        $autoloader = new Zend_Application_Module_Autoloader(array(
             'basePath' => APPLICATION_PATH . '/modules/default/',
             'namespace' => 'Default'
         ));
 
-        new Zend_Application_Module_Autoloader(array(
+        $autoloader = new Zend_Application_Module_Autoloader(array(
             'basePath' => APPLICATION_PATH . '/modules/telephony/',
             'namespace' => 'Telephony'
         ));
 
-        new Zend_Application_Module_Autoloader(array(
+        $autoloader = new Zend_Application_Module_Autoloader(array(
             'basePath' => APPLICATION_PATH . '/modules/elastix/',
             'namespace' => 'Elastix'
         ));
+
+        return $autoloader;
     }
 
+    /** 
+     * Define parâmetros padrões para a paginação
+     * @return null
+     */
     public function _initPagination() {
-        Zend_View_Helper_PaginationControl::setDefaultViewPartial('pagination.phtml');
+        return Zend_View_Helper_PaginationControl::setDefaultViewPartial('pagination.phtml');
     }
 
+    /** 
+     * Define os parâmetros padrões de localização.
+     * @return null
+     */
     public function _initLocale() {
-        Zend_Locale::setDefault('pt_BR');
+        return Zend_Locale::setDefault('pt_BR');
     }
 }

@@ -2,8 +2,8 @@
 
 /** 
  * Controladora de importação de dados do Elastix
- * @package Application
- * @subpackage Elastix
+ * @package Elastix
+ * @category Controller
  * @author William Urbano <contato@williamurbano.com.br>
  */
 class Elastix_ImportController extends Zend_Controller_Action {

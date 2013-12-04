@@ -1,18 +1,15 @@
 <?php
 
-class Telephony_CampaignsController extends Zend_Controller_Action
-{
+/** 
+ * Controladora de gerenciamento do cadastro de campanhas de atendimento
+ * @package Telephony
+ * @category Controller
+ * @author William Urbano <contato@williamurbano.com.br>
+ */
+class Telephony_CampaignsController extends Zend_Controller_Action {
 
-    public function init()
-    {
-        /* Initialize action controller here */
-    }
+    public function init() {}
 
-    public function indexAction()
-    {
-        // action body
-    }
-
+    public function indexAction() {}
 
 }
-

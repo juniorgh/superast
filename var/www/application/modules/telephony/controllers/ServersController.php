@@ -1,12 +1,23 @@
 <?php
 
+/** 
+ * Controladora de gerenciamento do cadastro de servidores
+ * @package Telephony
+ * @category Controller
+ * @author William Urbano <contato@williamurbano.com.br>
+ */
 class Telephony_ServersController extends Zend_Controller_Action {
 
+    /** 
+     * Ação índice da controladora. Faz a listagem dos registros de acordo com
+     * os filtros passados para a consulta SQL executada pelo Zend_Paginator
+     * @return void
+     */
     public function indexAction() {
         $where = null;
         $order = null;
         $request = $this->getRequest();
-        $params = parent::_getAllParams();
+        $params = $request->getParams();
             
         if(!empty($params['server_hostname'])) {
             $where[] = "server_hostname LIKE '%{$params['server_hostname']}%'";
@@ -44,15 +55,19 @@ class Telephony_ServersController extends Zend_Controller_Action {
         $this->view->assign('servers', $paginator);
     }
 
+    /** 
+     * Visualiza um determinado servidor cadastrado
+     * @return void
+     */
     public function viewAction() {
-        $id = parent::_getParam('id');
+        $id = $this->getRequest()->getParam('id', null);
         $server = Telephony_Model_Server::read($id);
         $this->view->assign('server', $server);
     }
 
     /** 
-     * Inclui ou atualiza o registro submetido via formulário.
-     * 
+     * Cria ou atualiza um novo servidor no banco de dados
+     * @return void
      */
     public function saveAction() {
         $this->_helper->viewRenderer->setNoRender();
@@ -69,28 +84,38 @@ class Telephony_ServersController extends Zend_Controller_Action {
                     $result = Telephony_Model_Server::create($params);
                 }
 
-                $url = $this->view->url(array('module' => 'telephony', 'controller' => 'servers', 'action' => 'index'), 'index_action', true);
-                $this->_redirect($url);
+                $this->_redirect($this->view->actions['index']);
             }
         } catch (Exception $e) {
             echo $e->getMessage();
         }
     }
 
+    /** 
+     * Altera o status do servidor para inativo
+     * @return void
+     */
     public function dropAction() {
-        $this->_helper->viewRenderer->setNoRender();
-        $this->_helper->layout->disableLayout();
+        $id = $this->getRequest()->getParam('id', null);
+        if(!is_null($id)) {
+            $data = array(
+                'server_id' => $id,
+                'server_active' => 0
+            );
 
-        $id = parent::_getParam('id');
-        $result = Telephony_Model_Server::delete($id);
+            Telephony_Model_Server::update($data);
+        }
 
-        $url = $this->view->url(array('module' => 'telephony', 'controller' => 'servers', 'action' => 'index'), 'index_action', true);
-        $this->_redirect($url);
+        $this->_redirect($this->view->actions['index']);
     }
 
+    /** 
+     * Formulário de criação e edição de servidor
+     * @return void
+     */
     public function formAction() {
-        $id = parent::_getParam('id', null);
-
+        $id = $this->getRequest()->getParam('id', null);
+        
         if(!is_null($id)) {
             $server = Telephony_Model_Server::read((int) $id);
             $this->view->assign('server', $server);

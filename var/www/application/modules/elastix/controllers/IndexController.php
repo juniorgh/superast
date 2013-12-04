@@ -2,21 +2,21 @@
 
 /** 
  * Controladora índice de integração com os servidores Elastix.
- * @package Application
- * @subpackage Elastix
+ * @package Elastix
+ * @category Controller
  * @author William Urbano <contato@williamurbano.com.br>
  */
 class Elastix_IndexController extends Zend_Controller_Action {
 
     /** 
-     * Método construtor da controladora. Não executa procedimentos.
+     * Método construtor da controladora. Não executa procedimentos
      * @return void
      */
     public function init() {}
 
     /** 
      * Realiza conexão com o módulo Call Center do Elastix por meio do Elastix
-     * Call Center Protocol para obter as informações dos agentes logados.
+     * Call Center Protocol para obter as informações dos agentes logados
      * @return void
      */
     public function indexAction() {

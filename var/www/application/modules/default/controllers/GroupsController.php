@@ -1,7 +1,18 @@
 <?php
 
+/** 
+ * Controladora de gerenciamento do controle de grupos
+ * @package Default
+ * @category Controller
+ * @author William Urbano <contato@williamurbano.com.br>
+ */
 class Default_GroupsController extends Zend_Controller_Action {
 
+    /** 
+     * Ação índice da controladora. Faz a listagem dos registros de acordo com
+     * os filtros passados para a consulta SQL executada pelo Zend_Paginator
+     * @return void
+     */
     public function indexAction() {
         $where = null;
         $order = null;
@@ -25,6 +36,10 @@ class Default_GroupsController extends Zend_Controller_Action {
         $this->view->assign('hasFilter', $hasFilter);
     }
 
+    /** 
+     * Visualiza um determinado grupo cadastrado
+     * @return void
+     */
     public function viewAction() {
         $id = $this->getRequest()->getParam('id', null);
         if(!is_null($id)) {
@@ -33,6 +48,10 @@ class Default_GroupsController extends Zend_Controller_Action {
         }
     }
 
+    /** 
+     * Cria ou atualiza um novo grupo no banco de dados
+     * @return void
+     */
     public function saveAction() {
         $this->_helper->viewRenderer->setNoRender();
         $this->_helper->layout->disableLayout();
@@ -65,6 +84,10 @@ class Default_GroupsController extends Zend_Controller_Action {
         $this->_redirect($this->view->actions['index']);
     }
 
+    /** 
+     * Altera o status do grupo para inativo
+     * @return void
+     */
     public function dropAction() {
         $id = $this->getRequest()->getParam('id', null);
         if(!is_null($id)) {
@@ -79,6 +102,10 @@ class Default_GroupsController extends Zend_Controller_Action {
         }
     }
 
+    /** 
+     * Formulário de criação e edição de grupo
+     * @return void
+     */
     public function formAction() {
         $id = $this->getRequest()->getParam('id', null);
         $menu_added = array();
