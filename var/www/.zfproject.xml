@@ -89,6 +89,7 @@
             <modelFile modelName="UserGroup"/>
             <modelFile modelName="UserCompany"/>
             <modelFile modelName="GroupMenu"/>
+            <modelFile modelName="Queue"/>
           </modelsDirectory>
           <viewsDirectory>
             <viewScriptsDirectory>
@@ -218,14 +219,25 @@
             <controllerFile controllerName="ReportCalls">
               <actionMethod actionName="index"/>
             </controllerFile>
+            <controllerFile controllerName="Agents">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="view"/>
+              <actionMethod actionName="save"/>
+              <actionMethod actionName="drop"/>
+              <actionMethod actionName="form"/>
+            </controllerFile>
           </controllersDirectory>
           <formsDirectory enabled="false"/>
           <layoutsDirectory enabled="false"/>
           <modelsDirectory>
             <dbTableDirectory>
               <dbTableFile dbTableName="Server"/>
+              <dbTableFile dbTableName="Queue"/>
+              <dbTableFile dbTableName="Agent"/>
             </dbTableDirectory>
             <modelFile modelName="Server"/>
+            <modelFile modelName="Queue"/>
+            <modelFile modelName="Agent"/>
           </modelsDirectory>
           <viewsDirectory>
             <viewScriptsDirectory>
@@ -262,6 +274,21 @@
               <viewControllerScriptsDirectory forControllerName="Servers">
                 <viewScriptFile forActionName="form"/>
               </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Agents">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Agents">
+                <viewScriptFile forActionName="view"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Agents">
+                <viewScriptFile forActionName="save"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Agents">
+                <viewScriptFile forActionName="drop"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Agents">
+                <viewScriptFile forActionName="form"/>
+              </viewControllerScriptsDirectory>
             </viewScriptsDirectory>
             <viewHelpersDirectory/>
             <viewFiltersDirectory/>
@@ -280,10 +307,27 @@
             <controllerFile controllerName="Index">
               <actionMethod actionName="index"/>
             </controllerFile>
+            <controllerFile controllerName="Import">
+              <actionMethod actionName="index"/>
+              <actionMethod actionName="queues"/>
+              <actionMethod actionName="extensions"/>
+              <actionMethod actionName="campaigns"/>
+              <actionMethod actionName="agents"/>
+              <actionMethod actionName="failureMail"/>
+            </controllerFile>
           </controllersDirectory>
           <formsDirectory enabled="false"/>
           <layoutsDirectory enabled="false"/>
-          <modelsDirectory/>
+          <modelsDirectory>
+            <dbTableDirectory>
+              <dbTableFile dbTableName="QueuesConfig"/>
+              <dbTableFile dbTableName="QueuesDetails"/>
+              <dbTableFile dbTableName="Agent"/>
+            </dbTableDirectory>
+            <modelFile modelName="QueuesConfig"/>
+            <modelFile modelName="QueuesDetails"/>
+            <modelFile modelName="Agent"/>
+          </modelsDirectory>
           <viewsDirectory>
             <viewScriptsDirectory>
               <viewControllerScriptsDirectory forControllerName="Queues">
@@ -294,6 +338,21 @@
               </viewControllerScriptsDirectory>
               <viewControllerScriptsDirectory forControllerName="Index">
                 <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Import">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Import">
+                <viewScriptFile forActionName="queues"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Import">
+                <viewScriptFile forActionName="extensions"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Import">
+                <viewScriptFile forActionName="campaigns"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Import">
+                <viewScriptFile forActionName="failureMail"/>
               </viewControllerScriptsDirectory>
             </viewScriptsDirectory>
             <viewHelpersDirectory/>
@@ -308,6 +367,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Error">
             <viewScriptFile forActionName="error"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Import">
+            <viewScriptFile forActionName="agents"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>
@@ -360,6 +422,8 @@
           <testApplicationControllerFile filesystemName="QueuesControllerTest.php"/>
           <testApplicationControllerFile filesystemName="ExtensionsControllerTest.php"/>
           <testApplicationControllerFile filesystemName="IndexControllerTest.php"/>
+          <testApplicationControllerFile filesystemName="ImportControllerTest.php"/>
+          <testApplicationControllerFile filesystemName="AgentsControllerTest.php"/>
         </testApplicationControllerDirectory>
       </testApplicationDirectory>
       <testLibraryDirectory>

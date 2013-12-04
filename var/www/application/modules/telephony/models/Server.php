@@ -26,7 +26,7 @@ class Telephony_Model_Server {
             }
 
             if($pager == false) {
-                return $server->fetchAll($query);
+                return $server->fetchAll($query)->toArray();
             } else {
                 return $query;
             }

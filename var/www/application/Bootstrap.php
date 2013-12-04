@@ -47,9 +47,18 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             'basePath' => APPLICATION_PATH . '/modules/telephony/',
             'namespace' => 'Telephony'
         ));
+
+        new Zend_Application_Module_Autoloader(array(
+            'basePath' => APPLICATION_PATH . '/modules/elastix/',
+            'namespace' => 'Elastix'
+        ));
     }
 
     public function _initPagination() {
         Zend_View_Helper_PaginationControl::setDefaultViewPartial('pagination.phtml');
+    }
+
+    public function _initLocale() {
+        Zend_Locale::setDefault('pt_BR');
     }
 }

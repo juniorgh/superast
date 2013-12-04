@@ -120,6 +120,26 @@ INSERT INTO `server` (`server_id`, `server_hostname`, `server_ip_address`, `serv
 (2, 'zincornio', '10.0.0.132', 'root', 'ultima91', 'admin', '123123', 1, 1),
 (3, 'voip', '10.0.0.1', 'root', 'MySQL987', 'admin', 'Pbx987Linux', 1, 1);
 
+CREATE TABLE `queue` (
+    `queue_id` INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `queue_name` VARCHAR(255),
+    `queue_number` VARCHAR(255),
+    `queue_server` INT(10) UNSIGNED NOT NULL,
+    `queue_company` INT(10) UNSIGNED DEFAULT NULL,
+    `queue_active` TINYINT(1) DEFAULT 1
+) ENGINE=InnoDB;
+
+CREATE TABLE `agent` (
+    `agent_id` INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `agent_name` VARCHAR(255),
+    `agent_number` VARCHAR(255),
+    `agent_password` VARCHAR(255),
+    `agent_server` INT(10) UNSIGNED NOT NULL,
+    `agent_company` INT(10) UNSIGNED NOT NULL,
+    `agent_user` INT(10) UNSIGNED NOT NULL,
+    `agent_active` TINYINT(1) DEFAULT 1
+)  ENGINE=InnoDB;
+
 ALTER TABLE `user`
 ADD CONSTRAINT `fk_user_role` FOREIGN KEY (`user_role`) REFERENCES `role`(`role_id`) ON UPDATE CASCADE ON DELETE NO ACTION,
 ADD CONSTRAINT `fk_user_company` FOREIGN KEY (`user_company`) REFERENCES `company`(`company_id`) ON UPDATE CASCADE ON DELETE NO ACTION;
@@ -135,3 +155,12 @@ ADD CONSTRAINT `fk_group_menu_menu` FOREIGN KEY (`group_menu_menu`) REFERENCES `
 ALTER TABLE `user_company`
 ADD CONSTRAINT `fk_user_company_user` FOREIGN KEY (`user_company_user`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE ON DELETE CASCADE,
 ADD CONSTRAINT `fk_user_company_company` FOREIGN KEY (`user_company_company`) REFERENCES `company`(`company_id`) ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE `queue`
+ADD CONSTRAINT `fk_queue_server` FOREIGN KEY (`queue_server`) REFERENCES `server`(`server_id`) ON UPDATE CASCADE ON DELETE CASCADE,
+ADD CONSTRAINT `fk_queue_company` FOREIGN KEY (`queue_company`) REFERENCES `company`(`company_id`) ON UPDATE CASCADE ON DELETE NO ACTION;
+
+ALTER TABLE `agent`
+ADD CONSTRAINT `fk_agent_server` FOREIGN KEY (`agent_server`) REFERENCES `server`(`server_id`),
+ADD CONSTRAINT `fk_agent_company` FOREIGN KEY (`agent_company`) REFERENCES `company`(`company_id`),
+ADD CONSTRAINT `fk_agent_user` FOREIGN KEY (`agent_user`) REFERENCES `user`(`user_id`);

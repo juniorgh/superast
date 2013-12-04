@@ -1,0 +1,41 @@
+#!/usr/bin/php -q
+<?php
+
+if(count($argv) < 4) {
+    echo "Todos os argumentos devem ser preenchidos\n";
+    echo "--module=moduleName\n--controller=ControllerName\n--db-table=table_name\n";
+    exit;
+}
+
+print_r($argv);
+$cmd = $params = array();
+$actions = array("view", "save", "drop", "form");
+
+foreach ($argv as $k => $v) {
+    if($k > 0) {
+        $exp = explode('=', str_replace('--', '', $v));
+        $params[$exp[0]] = $exp[1];
+    }
+}
+
+$cmd[] = sprintf("zf create controller %s 1 %s", $params['controller'], $params['module']);
+
+foreach($actions as $action) {
+    $cmd[] = sprintf("zf create action %s %s 1 %s", $action, $params['controller'], $params['module']);
+}
+
+$tableName = $params['db-table'];
+$modelName = '';
+
+foreach(explode('_', $tableName) as $t) {
+    $modelName .= ucfirst($t);
+}
+
+$cmd[] = sprintf("zf create db-table %s %s %s", $modelName, $tableName, $params['module']);
+$cmd[] = sprintf("zf create model %s %s", $modelName, $params['module']);
+
+foreach($cmd as $zf) {
+    exec($zf, $res);
+}
+
+?>
