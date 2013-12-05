@@ -61,8 +61,14 @@ class Telephony_ServersController extends Zend_Controller_Action {
      */
     public function viewAction() {
         $id = $this->getRequest()->getParam('id', null);
-        $server = Telephony_Model_Server::read($id);
-        $this->view->assign('server', $server);
+        if(!is_null($id)) {
+            $server = Telephony_Model_Server::read($id);
+            if(count($server) > 0) {
+                $this->view->assign('server', $server);
+            } else {
+                $this->_redirect($this->view->actions['index']);
+            }
+        }
     }
 
     /** 
@@ -73,22 +79,18 @@ class Telephony_ServersController extends Zend_Controller_Action {
         $this->_helper->viewRenderer->setNoRender();
         $this->_helper->layout->disableLayout();
 
-        try {
-            $request = $this->getRequest();
-            if($request->isPost()) {
-                $params = $request->getPost();
-                $params['server_is_elastix'] = $params['server_is_elastix'] == "nao" ? 0 : 1;
-                if(!empty($params['server_id'])) {
-                    $result = Telephony_Model_Server::update($params);
-                } else {
-                    $result = Telephony_Model_Server::create($params);
-                }
-
-                $this->_redirect($this->view->actions['index']);
+        $request = $this->getRequest();
+        if($request->isPost()) {
+            $params = $request->getPost();
+            $params['server_is_elastix'] = $params['server_is_elastix'] == "nao" ? 0 : 1;
+            if(!empty($params['server_id'])) {
+                $result = Telephony_Model_Server::update($params);
+            } else {
+                $result = Telephony_Model_Server::create($params);
             }
-        } catch (Exception $e) {
-            echo $e->getMessage();
         }
+        
+        $this->_redirect($this->view->actions['index']);
     }
 
     /** 

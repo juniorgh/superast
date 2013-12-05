@@ -64,10 +64,14 @@ class Telephony_QueuesController extends Zend_Controller_Action {
         $id = $this->getRequest()->getParam('id', null);
         if(!is_null($id)) {
             $queue = Telephony_Model_Queue::read($id);
-            $where = array("agent_queue_queue = {$queue['queue_id']}");
-            $agents = Telephony_Model_AgentQueue::read(null, false, $where, array('agent_name'), array('a.*'));
-            $this->view->assign('queue', $queue);
-            $this->view->assign('agents', $agents);
+            if(count($queue) > 0) {
+                $where = array("agent_queue_queue = {$queue['queue_id']}");
+                $agents = Telephony_Model_AgentQueue::read(null, false, $where, array('agent_name'), array('a.*'));
+                $this->view->assign('queue', $queue);
+                $this->view->assign('agents', $agents);
+            } else {
+                $this->_redirect($this->view->actions['index']);
+            }
         }
     }
 

@@ -44,7 +44,11 @@ class Default_CompaniesController extends Zend_Controller_Action {
         $id = $this->getRequest()->getParam('id', null);
         if(!is_null($id)) {
             $company = Default_Model_Company::read($id);
-            $this->view->assign('company', $company);
+            if(count($company) > 0) {
+                $this->view->assign('company', $company);
+            } else {
+                $this->_redirect($this->view->actions['index']);
+            }            
         }
     }
 
@@ -53,9 +57,6 @@ class Default_CompaniesController extends Zend_Controller_Action {
      * @return void
      */
     public function saveAction() {
-        $this->_helper->viewRenderer->setNoRender();
-        $this->_helper->layout->disableLayout();
-
         $request = $this->getRequest();
         if($request->isPost()) {
             $params = $request->getPost();
@@ -83,8 +84,9 @@ class Default_CompaniesController extends Zend_Controller_Action {
 
             $company = Default_Model_Company::update($data);
 
-            $this->_redirect($this->view->actions['index']);
         }
+
+        $this->_redirect($this->view->actions['index']);
     }
 
     /** 

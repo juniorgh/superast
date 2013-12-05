@@ -107,7 +107,11 @@ class Default_MenusController extends Zend_Controller_Action {
 
         if(!is_null($id)) {
             $menu = Default_Model_Menu::read($id);
-            $this->view->assign('menu', $menu);
+            if(count($menu) > 0) {
+                $this->view->assign('menu', $menu);
+            } else {
+                $this->_redirect($this->view->actions['index']);
+            }
         }
     }
 
@@ -116,9 +120,6 @@ class Default_MenusController extends Zend_Controller_Action {
      * @return void
      */
     public function saveAction() {
-        $this->_helper->viewRenderer->setNoRender();
-        $this->_helper->layout->disableLayout();
-
         try {
             $request = $this->getRequest();
             if($request->isPost()) {

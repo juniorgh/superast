@@ -44,7 +44,11 @@ class Default_RolesController extends Zend_Controller_Action {
         $id = $this->getRequest()->getParam('id', null);
         if(!is_null($id)) {
             $role = Default_Model_Role::read($id);
-            $this->view->assign('role', $role);
+            if(count($role) > 0) {
+                $this->view->assign('role', $role);
+            } else {
+                $this->_redirect($this->view->actions['index']);
+            }
         }
     }
 
@@ -53,9 +57,6 @@ class Default_RolesController extends Zend_Controller_Action {
      * @return void
      */
     public function saveAction() {
-        $this->_helper->viewRenderer->setNoRender();
-        $this->_helper->layout->disableLayout();
-
         $request = $this->getRequest();
         if($request->isPost()) {
             $params = $request->getPost();

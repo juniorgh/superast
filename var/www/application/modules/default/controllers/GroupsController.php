@@ -44,7 +44,11 @@ class Default_GroupsController extends Zend_Controller_Action {
         $id = $this->getRequest()->getParam('id', null);
         if(!is_null($id)) {
             $group = Default_Model_Group::read($id);
-            $this->view->assign('group', $group);
+            if(count($group) > 0) {
+                $this->view->assign('group', $group);
+            } else {
+                $this->_redirect($this->view->actions['index']);
+            }
         }
     }
 
@@ -53,9 +57,6 @@ class Default_GroupsController extends Zend_Controller_Action {
      * @return void
      */
     public function saveAction() {
-        $this->_helper->viewRenderer->setNoRender();
-        $this->_helper->layout->disableLayout();
-
         $request = $this->getRequest();
         if($request->isPost()) {
             $params = $request->getPost();

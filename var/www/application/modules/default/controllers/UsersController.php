@@ -34,7 +34,7 @@ class Default_UsersController extends Zend_Controller_Action {
             $where[] = "user_login LIKE '%{$params['user_login']}%'";
         }
 
-        if(!empty($params['user_role'])) {
+        if(!empty($params['user_role']) && $params['user_role'] != "selecione") {
             $hasFilter = true;
             $where[] = "user_role = {$params['user_role']}";
         }
@@ -60,16 +60,16 @@ class Default_UsersController extends Zend_Controller_Action {
         $id = $this->getRequest()->getParam('id', null);
         if(!is_null($id)) {
             $user = Default_Model_User::read($id);
-            if(is_null($user)) {
+            if(count($user) > 0) {
+                $groups = Default_Model_UserGroup::readUserGroups($user['user_id']);
+                $companies = Default_Model_UserCompany::readUserCompanies($user['user_id']);
+
+                $this->view->assign('groups', $groups);
+                $this->view->assign('companies', $companies);
+                $this->view->assign('user', $user);
+            } else {
                 $this->_redirect($this->view->actions['index']);
             }
-
-            $groups = Default_Model_UserGroup::readUserGroups($user['user_id']);
-            $companies = Default_Model_UserCompany::readUserCompanies($user['user_id']);
-
-            $this->view->assign('groups', $groups);
-            $this->view->assign('companies', $companies);
-            $this->view->assign('user', $user);
         }
     }
 
@@ -78,9 +78,6 @@ class Default_UsersController extends Zend_Controller_Action {
      * @return void
      */
     public function saveAction() {
-        $this->_helper->viewRenderer->setNoRender();
-        $this->_helper->layout->disableLayout();
-
         $request = $this->getRequest();
         if($request->isPost()) {
             $params = $request->getPost();

@@ -135,8 +135,6 @@ class Default_AuthenticationController extends Zend_Controller_Action {
      * @return void
      */
     public function logoutAction() {
-        $this->_helper->viewRenderer->setNoRender();
-        $this->_helper->layout->disableLayout();
         Zend_Auth::getInstance()->clearIdentity();
         $url = $this->view->url(array('module' => 'default', 'controller' => 'authentication', 'action' => 'index'), 'authentication_index');
         $this->_redirect($url);
