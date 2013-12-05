@@ -14,7 +14,7 @@ class Telephony_AgentsController extends Zend_Controller_Action {
      * @return void
      */
     public function indexAction() {
-        $where = null;
+        $where = array('agent_active = 1');
         $order = array('agent_name');
         $request = $this->getRequest();
         $params = $request->getParams();
