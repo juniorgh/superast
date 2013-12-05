@@ -22,19 +22,34 @@ class Telephony_Model_Queue {
     
     /** 
      * Busca um ou mais registros no banco de dados pela chave primária ou pelos parâmetros passados utilizados nas cláusulas SQL
-     * @param  integer                    $id    Valor da chave primária do registro desejado
-     * @param  boolean                    $pager Define se a consulta é destinada ao Zend_Paginator
-     * @param  array                      $where Condicionais booleanas para preencher as cláusulas WHERE e AND para a consulta
-     * @param  array                      $order Campos para preencher a cláusula ORDER BY 
-     * @return array|Zend_Db_Table_Select        Se $pager for FALSE retorna um array com o result set. Caso contrário, retorna um
-     *                                           objeto do tipo Zend_Db_Table_Select para ser executado pelo Zend_Paginator
+     * @param  integer                    $id      Valor da chave primária do registro desejado
+     * @param  boolean                    $pager   Define se a consulta é destinada ao Zend_Paginator
+     * @param  array                      $where   Condicionais booleanas para preencher as cláusulas WHERE e AND para a consulta
+     * @param  array                      $order   Campos para preencher a cláusula ORDER BY 
+     * @param  array                      $columns Nomes das colunas que a consulta irá retornar. Se nulo, retorna todas as colunas
+     * @return array|Zend_Db_Table_Select          Se $pager for FALSE retorna um array com o result set. Caso contrário, retorna um
+     *                                             objeto do tipo Zend_Db_Table_Select para ser executado pelo Zend_Paginator
      */
-    public static function read($id = null, $pager = false, array $where = null, array $order = null) {
+    public static function read($id = null, $pager = false, array $where = null, array $order = null, array $columns = null) {
         $queue = new Telephony_Model_DbTable_Queue();
-        if(!is_null($id)) {
-            return $queue->find($id)->current()->toArray();
+        $query = $queue->select()
+                ->setIntegrityCheck(false);
+
+        if(!is_null($columns)) {
+            $query->from(array('q' => 'queue'), array())
+            ->joinLeft(array('c' => 'company'), 'c.company_id = q.queue_company', array())
+            ->join(array('s' => 'server'), 's.server_id = q.queue_server', array())
+            ->columns($columns);
         } else {
-            $query = $queue->select();
+            $query->from(array('q' => 'queue'))
+            ->joinLeft(array('c' => 'company'), 'c.company_id = q.queue_company')
+            ->join(array('s' => 'server'), 's.server_id = q.queue_server');
+        }
+
+        if(!is_null($id)) {
+            $query->where('queue_id = ?', $id);
+            return $queue->fetchRow($query)->toArray();
+        } else {
             if(!is_null($where)) {
                 foreach($where as $cond) {
                     $query->where($cond);

@@ -1,0 +1,77 @@
+<?php echo $this->partial_header; ?>
+<div id="view_wrapper">
+    <div class="ui top red attached segment">
+        <h4 class="ui header">
+            Visualizando fila <?php echo $this->queue['queue_name'] ?>
+        </h4>
+    </div>
+    <div class="ui attached segment">
+        <div class="ui three column grid">
+            <div class="column">
+                <b>Nome</b>
+            </div>
+            <div class="column">
+                <?php echo $this->queue['queue_name'] ?>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui attached segment">
+        <div class="ui three column grid">
+            <div class="column">
+                <b>Número</b>
+            </div>
+            <div class="column">
+                <?php echo $this->queue['queue_number'] ?>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui attached segment">
+        <div class="ui three column grid">
+            <div class="column">
+                <b>Servidor</b>
+            </div>
+            <div class="column">
+                <?php echo $this->queue['server_hostname'] ?>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui attached segment">
+        <div class="ui three column grid">
+            <div class="column">
+                <b>Empresa</b>
+            </div>
+            <div class="column">
+                <?php echo $this->queue['company_name'] ?>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui attached segment">
+        <div class="ui three column grid">
+            <div class="column">
+                <b>Agentes</b>
+            </div>
+            <div class="column">
+                <div class="ui vertical text menu">
+                <?php foreach($this->agents as $agent) { ?>
+                    <a class="item haspopup" data-content="<?php printf('Visualizar agente %s', $agent['agent_name']) ?>" target="_blank" href="<?php echo $this->url(array('module' => 'telephony', 'controller' => 'agents', 'action' => 'view', 'id' => $agent['agent_id']), 'view_action', false) ?>">
+                        <?php printf('%s - %s', $agent['agent_number'], $agent['agent_name']); ?> <i class="external url icon"></i>
+                    </a>
+                <?php } ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ui bottom attached segment">
+        <a href="<?php echo $this->actions['index'] ?>" class="ui red labeled icon button">
+            <i class="reply mail icon"></i> Voltar
+        </a>
+        
+        <a href="<?php echo $this->url(array('module' => $this->moduleName, 'controller' => $this->controllerName, 'action' => 'edit', 'id' => $this->queue['queue_id']), 'edit_action', true) ?>" class="ui blue labeled icon button">
+            <i class="edit icon"></i> Editar
+        </a>
+    </div>
+</div>

@@ -140,6 +140,12 @@ CREATE TABLE `agent` (
     `agent_active` TINYINT(1) DEFAULT 1
 )  ENGINE=InnoDB;
 
+CREATE TABLE `agent_queue` (
+    `agent_queue_id` INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `agent_queue_agent` INT(10) UNSIGNED NOT NULL,
+    `agent_queue_queue` INT(10) UNSIGNED NOT NULL
+)  ENGINE=InnoDB;
+
 ALTER TABLE `user`
 ADD CONSTRAINT `fk_user_role` FOREIGN KEY (`user_role`) REFERENCES `role`(`role_id`) ON UPDATE CASCADE ON DELETE NO ACTION,
 ADD CONSTRAINT `fk_user_company` FOREIGN KEY (`user_company`) REFERENCES `company`(`company_id`) ON UPDATE CASCADE ON DELETE NO ACTION;
@@ -164,3 +170,7 @@ ALTER TABLE `agent`
 ADD CONSTRAINT `fk_agent_server` FOREIGN KEY (`agent_server`) REFERENCES `server`(`server_id`),
 ADD CONSTRAINT `fk_agent_company` FOREIGN KEY (`agent_company`) REFERENCES `company`(`company_id`),
 ADD CONSTRAINT `fk_agent_user` FOREIGN KEY (`agent_user`) REFERENCES `user`(`user_id`);
+
+ALTER TABLE `agent_queue` 
+ADD CONSTRAINT `fk_agent_queue_agent` FOREIGN KEY (`agent_queue_agent`) REFERENCES `agent`(`agent_id`) ON UPDATE CASCADE ON DELETE CASCADE,
+ADD CONSTRAINT `fk_agent_queue_queue` FOREIGN KEY (`agent_queue_queue`) REFERENCES `queue`(`queue_id`) ON UPDATE CASCADE ON DELETE CASCADE;

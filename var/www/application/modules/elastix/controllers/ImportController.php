@@ -30,8 +30,63 @@ class Elastix_ImportController extends Zend_Controller_Action {
      * @return void
      */
     public function queuesAction() {
-        $result = array('status' => true, 'message' => 'all right!');
-        $this->getResponse()->setHeader('Content-Type', 'application/json')->setBody(Zend_Json::encode($result));
+        try {
+            $servers = Telephony_Model_Server::read();
+            foreach($servers as $server) {
+                if((bool) $server['server_is_elastix']) {
+                    $db = Zend_Db::factory('Pdo_Mysql', array(
+                        'host' => $server['server_ip_address'],
+                        'username' => $server['server_database_user'],
+                        'password' => $server['server_database_password'],
+                        'dbname' => 'asterisk'
+                    ));
+
+                    $queuesConfig = new Elastix_Model_QueuesConfig($db);
+                    $queuesDetails = new Elastix_Model_QueuesDetails($db);
+                    $queues = $queuesConfig->read();
+
+                    foreach($queues as $config) {
+                        $queue = array_shift(Telephony_Model_Queue::read(null, false, array("queue_number = {$config['extension']}", "queue_server = {$server['server_id']}")));
+                        $queue['queue_name'] = $config['descr'];
+                        $queue['queue_number'] = $config['extension'];
+                        $queue['queue_server'] = $server['server_id'];
+
+                        if(array_key_exists('queue_id', $queue)) {
+                            Telephony_Model_Queue::update($queue);
+                        } else {
+                            $queue['queue_id'] = Telephony_Model_Queue::create($queue);
+                        }
+
+                        Telephony_Model_AgentQueue::deleteByQueue($queue['queue_id']);
+
+                        $details = $queuesDetails->readMembers($config['extension']);
+                        $queueAgents = array();
+                        
+                        foreach($details as $detail) {
+                            $queueAgents[] = str_replace(array('Agent', '/', ',0'), '', $detail['data']);
+                        }
+
+                        if(count($queueAgents) > 0) {
+                            $agents = Telephony_Model_Agent::readAgentsList($queueAgents, $server['server_id']);
+                            foreach($agents as $agent) {
+                                $agent_queue = array(
+                                    'agent_queue_agent' => $agent['agent_id'],
+                                    'agent_queue_queue' => $queue['queue_id']
+                                );
+
+                                Telephony_Model_AgentQueue::create($agent_queue);
+                            }
+                        }
+                    }
+                }
+            }
+
+            $response = array('status' => true, 'message' => 'all right!');
+            $this->getResponse()->setHeader('Content-Type', 'application/json')->setBody(Zend_Json::encode($response));
+        } catch (Exception $e) {
+            $response = array('status' => false, 'message' => $e->getMessage(), 'server' => $server );
+            $this->getResponse()->setHeader('Content-Type', 'application/json')->setBody(Zend_Json::encode($response));
+        }
     }
 
     /** 
@@ -39,8 +94,8 @@ class Elastix_ImportController extends Zend_Controller_Action {
      * @return void
      */
     public function extensionsAction() {
-        $result = array('status' => true, 'message' => 'all right!');
-        $this->getResponse()->setHeader('Content-Type', 'application/json')->setBody(Zend_Json::encode($result));
+        $response = array('status' => true, 'message' => 'all right!');
+        $this->getResponse()->setHeader('Content-Type', 'application/json')->setBody(Zend_Json::encode($response));
     }
 
     /** 
@@ -49,8 +104,8 @@ class Elastix_ImportController extends Zend_Controller_Action {
      * @return void
      */
     public function campaignsAction() {
-        $result = array('status' => true, 'message' => 'all right!');
-        $this->getResponse()->setHeader('Content-Type', 'application/json')->setBody(Zend_Json::encode($result));
+        $response = array('status' => true, 'message' => 'all right!');
+        $this->getResponse()->setHeader('Content-Type', 'application/json')->setBody(Zend_Json::encode($response));
     }
 
     /** 

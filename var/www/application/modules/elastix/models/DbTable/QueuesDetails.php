@@ -17,4 +17,12 @@ class Elastix_Model_DbTable_QueuesDetails extends Zend_Db_Table_Abstract {
      */
     protected $_name = 'queues_details';
 
+    /** 
+     * Nome do campo correspondente à
+     * chave primária da tabela
+     * @var string
+     * @access protected
+     */
+    protected $_primary = 'id';
+
 }

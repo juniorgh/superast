@@ -1,0 +1,57 @@
+<?php echo $this->partial_header ?>
+
+<form action="<?php echo $this->actions['save'] ?>" method="post" class="ui fluid form segment">
+    <?php if(!is_null($this->queue)) { ?>
+    <input type="hidden" id="queue_id" name="queue_id" value="<?php echo $this->queue['queue_id'] ?>">
+    <?php } ?>
+    <div class="two fields">
+        <div class="<?php echo $this->disabled ?>field">
+            <label for="queue_name">Nome</label>
+            <input id="queue_name" name="queue_name" value="<?php echo $this->queue["queue_name"]?>" placeholder="Nome da fila" type="text"<?php echo $this->disabled ?>>
+        </div>
+
+        <div class="<?php echo $this->disabled ?>field">
+            <label for="queue_number">Número</label>
+            <input id="queue_number" name="queue_number" value="<?php echo $this->queue["queue_number"]?>" placeholder="Número da fila" type="text"<?php echo $this->disabled ?>>
+        </div>
+    </div>
+
+    <div class="two fields">
+        <div class="<?php echo $this->disabled ?>field">
+            <label for="queue_server">Servidor</label>
+            <div class="ui selection  dropdown">
+                <input type="hidden" name="queue_server" id="queue_server" value="<?php echo (int) $this->queue["queue_server"] == 0 ? "selecione" : $this->queue["queue_server"] ?>"<?php echo $this->disabled ?>>
+                <div class="text"></div>
+                <i class="dropdown icon"></i>
+                <div class="menu ui transition hidden<?php echo $this->disabled ?>">
+                    <div class="item" data-value="selecione">Selecione</div>
+                    <?php foreach($this->servers as $server) { ?>
+                    <div class="item" data-value="<?php echo $server['server_id'] ?>"><?php echo $server['server_hostname'] ?></div>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label for="queue_company">Empresa</label>
+            <div class="ui selection dropdown">
+                <input type="hidden" name="queue_company" id="queue_company" value="<?php echo (int) $this->queue["queue_company"] == 0 ? "selecione" : $this->queue["queue_company"] ?>">
+                <div class="text"></div>
+                <i class="dropdown icon"></i>
+                <div class="menu ui transition hidden">
+                    <div class="item" data-value="selecione">Selecione</div>
+                    <?php foreach($this->companies as $company) { ?>
+                    <div class="item" data-value="<?php echo $company['company_id'] ?>"><?php echo $company['company_name'] ?></div>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui green labeled icon button submit">
+        <i class="save icon"></i> Salvar
+    </div>
+    <a href="<?php echo $this->actions['index'] ?>" class="ui red labeled icon button">
+        <i class="reply mail icon"></i> Cancelar
+    </a>
+</form>
