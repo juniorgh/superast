@@ -36,7 +36,7 @@ class Default_Model_User {
             ->joinLeft(array('r' => 'role'), 'r.role_id = u.user_role')
             ->where('user_id = ?', $id);
 
-            return $user->fetchRow($query);
+            return $user->fetchRow($query)->toArray();
         } else {
             $query = $user->select()->setIntegrityCheck(false)
             ->from(array('u' => 'user'))
