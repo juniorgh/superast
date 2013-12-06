@@ -89,6 +89,13 @@ class Telephony_Model_Agent {
         return $agent->delete($where);
     }
 
+    /** 
+     * Busca no banco de dados uma lista de agentes em determinado servidor
+     * @param  array   $number   Lista de número de agentes
+     * @param  integer $serverId Servidor o qual os agentes serão procurados
+     * @param  boolean $active   Define se o agente deve estar ativo ou não
+     * @return array             Resultset com os agentes encontrados
+     */
     public static function readAgentsList($number, $serverId, $active = true) {
         $agent = new Telephony_Model_DbTable_Agent();
 
