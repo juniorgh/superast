@@ -82,11 +82,11 @@ class Elastix_ImportController extends Zend_Controller_Action {
             }
 
             $response = array('status' => true, 'message' => 'all right!');
-            $this->getResponse()->setHeader('Content-Type', 'application/json')->setBody(Zend_Json::encode($response));
         } catch (Exception $e) {
-            $response = array('status' => false, 'message' => $e->getMessage(), 'server' => $server );
-            $this->getResponse()->setHeader('Content-Type', 'application/json')->setBody(Zend_Json::encode($response));
+            $response = array('status' => false, 'message' => $e->getTraceAsString(), 'server' => $server );
         }
+
+        $this->getResponse()->setHeader('Content-Type', 'application/json')->setBody(Zend_Json::encode($response));
     }
 
     /** 
@@ -94,7 +94,40 @@ class Elastix_ImportController extends Zend_Controller_Action {
      * @return void
      */
     public function extensionsAction() {
-        $response = array('status' => true, 'message' => 'all right!');
+        try {
+            $servers = Telephony_Model_Server::read(null, false, array('server_active = 1'));
+            foreach($servers as $server) {
+                if((bool) $server['server_is_elastix']) {
+                    $db = Zend_Db::factory('Pdo_Mysql', array(
+                        'host' => $server['server_ip_address'],
+                        'username' => $server['server_database_user'],
+                        'password' => $server['server_database_password'],
+                        'dbname' => 'asterisk'
+                    ));
+
+                    $_users = new Elastix_Model_Users($db);
+                    $users = $_users->read();
+                    foreach($users as $user) {
+                        $where = array("extension_number = '{$user['extension']}'", "extension_server = {$server['server_id']}");
+                        $extension = array_shift(Telephony_Model_Extension::read(null, false, $where, null, array('e.*')));
+                        $extension['extension_name'] = $user['name'];
+                        $extension['extension_number'] = $user['extension'];
+                        $extension['extension_server'] = $server['server_id'];
+
+                        if(array_key_exists('extension_id', $extension)) {
+                            Telephony_Model_Extension::update($extension);
+                        } else {
+                            $extension['extension_id'] = Telephony_Model_Extension::create($extension);
+                        }
+                    }
+                }
+            }
+
+            $response = array('status' => true, 'message' => 'all right!');
+        } catch (Exception $e) {
+            $response = array('status' => false, 'message' => $e->getTraceAsString(), 'server' => $server);
+        }
+
         $this->getResponse()->setHeader('Content-Type', 'application/json')->setBody(Zend_Json::encode($response));
     }
 
@@ -116,7 +149,7 @@ class Elastix_ImportController extends Zend_Controller_Action {
         try {
             $servers = Telephony_Model_Server::read(null, false, array('server_active = 1'));
             foreach($servers as $server) {
-                if((bool) $server['server_is_elastix']) {
+                if((bool) $server['server_is_elastix'] && (bool) $server['server_has_callcenter']) {
                     $db = Zend_Db::factory('Pdo_Mysql', array(
                         'host' => $server['server_ip_address'],
                         'username' => $server['server_database_user'],
@@ -148,11 +181,11 @@ class Elastix_ImportController extends Zend_Controller_Action {
             }
 
             $response = array('status' => true, 'message' => 'Importação ok!');
-            $this->getResponse()->setHeader('Content-Type', 'application/json')->setBody(Zend_Json::encode($response));
         } catch (Exception $e) {
-            $response = array('status' => false, 'message' => $e->getMessage(), 'server' => $server );
-            $this->getResponse()->setHeader('Content-Type', 'application/json')->setBody(Zend_Json::encode($response));
+            $response = array('status' => false, 'message' => $e->getTraceAsString(), 'server' => $server );
         }
+
+        $this->getResponse()->setHeader('Content-Type', 'application/json')->setBody(Zend_Json::encode($response));
     }
 
     /** 

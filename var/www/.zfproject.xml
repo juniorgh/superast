@@ -206,6 +206,10 @@
             </controllerFile>
             <controllerFile controllerName="Extensions">
               <actionMethod actionName="index"/>
+              <actionMethod actionName="view"/>
+              <actionMethod actionName="save"/>
+              <actionMethod actionName="drop"/>
+              <actionMethod actionName="form"/>
             </controllerFile>
             <controllerFile controllerName="Queues">
               <actionMethod actionName="index"/>
@@ -239,11 +243,13 @@
               <dbTableFile dbTableName="Queue"/>
               <dbTableFile dbTableName="Agent"/>
               <dbTableFile dbTableName="AgentQueue"/>
+              <dbTableFile dbTableName="Extension"/>
             </dbTableDirectory>
             <modelFile modelName="Server"/>
             <modelFile modelName="Queue"/>
             <modelFile modelName="Agent"/>
             <modelFile modelName="AgentQueue"/>
+            <modelFile modelName="Extension"/>
           </modelsDirectory>
           <viewsDirectory>
             <viewScriptsDirectory>
@@ -307,6 +313,18 @@
               <viewControllerScriptsDirectory forControllerName="Queues">
                 <viewScriptFile forActionName="form"/>
               </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Extensions">
+                <viewScriptFile forActionName="view"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Extensions">
+                <viewScriptFile forActionName="save"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Extensions">
+                <viewScriptFile forActionName="drop"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Extensions">
+                <viewScriptFile forActionName="form"/>
+              </viewControllerScriptsDirectory>
             </viewScriptsDirectory>
             <viewHelpersDirectory/>
             <viewFiltersDirectory/>
@@ -341,10 +359,12 @@
               <dbTableFile dbTableName="QueuesConfig"/>
               <dbTableFile dbTableName="QueuesDetails"/>
               <dbTableFile dbTableName="Agent"/>
+              <dbTableFile dbTableName="Users"/>
             </dbTableDirectory>
             <modelFile modelName="QueuesConfig"/>
             <modelFile modelName="QueuesDetails"/>
             <modelFile modelName="Agent"/>
+            <modelFile modelName="Users"/>
           </modelsDirectory>
           <viewsDirectory>
             <viewScriptsDirectory>

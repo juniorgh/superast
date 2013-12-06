@@ -1,0 +1,55 @@
+<?php echo $this->partial_header ?>
+
+<form action="<?php echo $this->actions['save'] ?>" method="post" class="ui fluid form segment">
+    <?php if(!is_null($this->extension)) { ?>
+    <input type="hidden" id="extension_id" name="extension_id" value="<?php echo $this->extension['extension_id'] ?>">
+    <?php } ?>
+    <div class="four fields">
+        <div class="<?php echo $this->disabled ?>field">
+            <label for="extension_name">Nome</label>
+            <input id="extension_name" name="extension_name" value="<?php echo $this->extension["extension_name"]?>" placeholder="Nome do ramal" type="text"<?php echo $this->disabled ?>>
+        </div>
+
+        <div class="<?php echo $this->disabled ?>field">
+            <label for="extension_number">Número</label>
+            <input id="extension_number" name="extension_number" value="<?php echo $this->extension["extension_number"]?>" placeholder="Número do ramal" type="text"<?php echo $this->disabled ?>>
+        </div>
+
+        <div class="<?php echo $this->disabled ?>field">
+            <label for="extension_server">Servidor</label>
+            <div class="ui selection fluid <?php echo $this->disabled ?> dropdown">
+                <input type="hidden" name="extension_server" id="extension_server" value="<?php echo (int) $this->extension["extension_server"] == 0 ? "selecione" : $this->extension["extension_server"] ?>"<?php echo $this->disabled ?>>
+                <div class="text"></div>
+                <i class="dropdown icon"></i>
+                <div class="menu ui transition hidden <?php echo $this->disabled ?>">
+                    <div class="item" data-value="selecione">Selecione</div>
+                    <?php foreach($this->servers as $server) { ?>
+                    <div class="item" data-value="<?php echo $server['server_id'] ?>"><?php echo $server['server_hostname'] ?></div>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label for="extension_user">Usuário</label>
+            <div class="ui selection fluid dropdown">
+                <input type="hidden" name="extension_user" id="extension_user" value="<?php echo (int) $this->extension["extension_user"] == 0 ? "selecione" : $this->extension["extension_user"] ?>">
+                <div class="text"></div>
+                <i class="dropdown icon"></i>
+                <div class="menu ui transition hidden">
+                    <div class="item" data-value="selecione">Selecione</div>
+                    <?php foreach($this->users as $user) { ?>
+                    <div class="item" data-value="<?php echo $user['user_id'] ?>"><?php echo $user['user_name'] ?></div>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui green labeled icon button submit">
+        <i class="save icon"></i> Salvar
+    </div>
+    <a href="<?php echo $this->actions['index'] ?>" class="ui red labeled icon button">
+        <i class="reply mail icon"></i> Cancelar
+    </a>
+</form>

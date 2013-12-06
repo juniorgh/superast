@@ -112,6 +112,7 @@ CREATE TABLE `server` (
     `server_ami_user` VARCHAR(255),
     `server_ami_secret` VARCHAR(255),
     `server_is_elastix` TINYINT(1) DEFAULT 0,
+    `server_has_callcenter` TINYINT(1) DEFAULT 0,
     `server_active` TINYINT(1) DEFAULT 1
 )  ENGINE=InnoDB AUTO_INCREMENT=4;
 
@@ -146,6 +147,15 @@ CREATE TABLE `agent_queue` (
     `agent_queue_queue` INT(10) UNSIGNED NOT NULL
 )  ENGINE=InnoDB;
 
+CREATE TABLE `extension` (
+    `extension_id` INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `extension_name` VARCHAR(255),
+    `extension_number` VARCHAR(255),
+    `extension_server` INT(10) UNSIGNED NOT NULL,
+    `extension_user` INT(10) UNSIGNED,
+    `extension_active` TINYINT(1) DEFAULT 1
+)  ENGINE=InnoDB;
+
 ALTER TABLE `user`
 ADD CONSTRAINT `fk_user_role` FOREIGN KEY (`user_role`) REFERENCES `role`(`role_id`) ON UPDATE CASCADE ON DELETE NO ACTION,
 ADD CONSTRAINT `fk_user_company` FOREIGN KEY (`user_company`) REFERENCES `company`(`company_id`) ON UPDATE CASCADE ON DELETE NO ACTION;
@@ -174,3 +184,7 @@ ADD CONSTRAINT `fk_agent_user` FOREIGN KEY (`agent_user`) REFERENCES `user`(`use
 ALTER TABLE `agent_queue` 
 ADD CONSTRAINT `fk_agent_queue_agent` FOREIGN KEY (`agent_queue_agent`) REFERENCES `agent`(`agent_id`) ON UPDATE CASCADE ON DELETE CASCADE,
 ADD CONSTRAINT `fk_agent_queue_queue` FOREIGN KEY (`agent_queue_queue`) REFERENCES `queue`(`queue_id`) ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE `extension`
+ADD CONSTRAINT `fk_extension_server` FOREIGN KEY (`extension_server`) REFERENCES `server`(`server_id`) ON UPDATE CASCADE ON DELETE CASCADE,
+ADD CONSTRAINT `fk_extension_user` FOREIGN KEY(`extension_user`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE ON DELETE NO ACTION;
