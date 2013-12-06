@@ -68,6 +68,15 @@
                 <?php echo $this->server['server_is_elastix'] == 0 ? "Não" : "Sim" ?>
             </div>
         </div>
+
+        <div class="ui three column grid">
+            <div class="column">
+                <b>Utiliza módulo Call Center do Elastix?</b>
+            </div>
+            <div class="column">
+                <?php echo $this->server['server_has_callcenter'] == 0 ? "Não" : "Sim" ?>
+            </div>
+        </div>
     </div>
     <div class="ui bottom attached segment">
         <a href="<?php echo $this->actions['index'] ?>" class="ui red labeled icon button">

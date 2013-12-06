@@ -34,15 +34,29 @@
             <input id="server_ami_secret" name="server_ami_secret" value="<?php echo $this->server["server_ami_secret"]?>" placeholder="Senha do Asterisk Manager Interface" type="password">
         </div>
     </div>
-    <div class="field">
-        <label for="server_is_elastix">Elastix?</label>
-        <div class="ui selection dropdown">
-            <input type="hidden" name="server_is_elastix" id="server_is_elastix" value="<?php echo $this->server["server_is_elastix"] == 0 && !is_null($this->server['server_is_elastix']) ? "nao" : "sim" ?>">
-            <div class="text"><?php echo $this->server["server_is_elastix"] == "nao" ? "Não" : "Sim" ?></div>
-            <i class="dropdown icon"></i>
-            <div class="menu ui transition hidden">
-                <div class="item" data-value="sim">Sim</div>
-                <div class="item active" data-value="nao">Não</div>
+    <div class="two fields">
+        <div class="field">
+            <label for="server_is_elastix">Elastix?</label>
+            <div class="ui selection fluid dropdown">
+                <input type="hidden" name="server_is_elastix" id="server_is_elastix" value="<?php echo $this->server["server_is_elastix"] == 0 && !is_null($this->server['server_is_elastix']) ? "nao" : "sim" ?>">
+                <div class="text"><?php echo $this->server["server_is_elastix"] == "nao" ? "Não" : "Sim" ?></div>
+                <i class="dropdown icon"></i>
+                <div class="menu ui transition hidden">
+                    <div class="item" data-value="sim">Sim</div>
+                    <div class="item active" data-value="nao">Não</div>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <label for="server_has_callcenter">Utiliza módulo Call Center do Elastix?</label>
+            <div class="ui selection fluid dropdown">
+                <input type="hidden" name="server_has_callcenter" id="server_has_callcenter" value="<?php echo $this->server["server_has_callcenter"] == 0 && !is_null($this->server['server_has_callcenter']) ? "nao" : "sim" ?>">
+                <div class="text"><?php echo $this->server["server_has_callcenter"] == "nao" ? "Não" : "Sim" ?></div>
+                <i class="dropdown icon"></i>
+                <div class="menu ui transition hidden">
+                    <div class="item" data-value="sim">Sim</div>
+                    <div class="item active" data-value="nao">Não</div>
+                </div>
             </div>
         </div>
     </div>

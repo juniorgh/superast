@@ -21,16 +21,31 @@
             <input id="server_ami_user" name="server_ami_user" value="<?php echo isset($this->params["server_ami_user"]) ? $this->params["server_ami_user"] : ""?>" placeholder="Usuário do Asterisk Manager Interface" type="text">
         </div>
     </div>
-    <div class="field">
-        <label for="server_is_elastix">Elastix?</label>
-        <div class="ui selection dropdown">
-            <input type="hidden" name="server_is_elastix" id="server_is_elastix" value="<?php echo isset($this->params["server_is_elastix"]) ? $this->params["server_is_elastix"] : "selecione" ?>">
-            <div class="text"></div>
-            <i class="dropdown icon"></i>
-            <div class="menu ui transition hidden">
-                <div class="item" data-value="selecione">Selecione</div>
-                <div class="item" data-value="sim">Sim</div>
-                <div class="item active" data-value="nao">Não</div>
+    <div class="two fields">
+        <div class="field">
+            <label for="server_is_elastix">Elastix?</label>
+            <div class="ui selection fluid dropdown">
+                <input type="hidden" name="server_is_elastix" id="server_is_elastix" value="<?php echo isset($this->params["server_is_elastix"]) ? $this->params["server_is_elastix"] : "selecione" ?>">
+                <div class="text"></div>
+                <i class="dropdown icon"></i>
+                <div class="menu ui transition hidden">
+                    <div class="item" data-value="selecione">Selecione</div>
+                    <div class="item" data-value="sim">Sim</div>
+                    <div class="item active" data-value="nao">Não</div>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <label for="server_has_callcenter">Utiliza módulo Call Center do Elastix?</label>
+            <div class="ui selection fluid dropdown">
+                <input type="hidden" name="server_has_callcenter" id="server_has_callcenter" value="<?php echo isset($this->params["server_has_callcenter"]) ? $this->params["server_has_callcenter"] : "selecione" ?>">
+                <div class="text"></div>
+                <i class="dropdown icon"></i>
+                <div class="menu ui transition hidden">
+                    <div class="item" data-value="selecione">Selecione</div>
+                    <div class="item" data-value="sim">Sim</div>
+                    <div class="item active" data-value="nao">Não</div>
+                </div>
             </div>
         </div>
     </div>

@@ -40,6 +40,11 @@ class Telephony_ServersController extends Zend_Controller_Action {
             $where[] = "server_is_elastix = {$is_elastix}";
         }
 
+        if(isset($params['server_has_callcenter']) && $params['server_has_callcenter'] != 'selecione') {
+            $is_elastix = $params['server_has_callcenter'] == "sim" ? 1 : 0;
+            $where[] = "server_has_callcenter = {$is_elastix}";
+        }
+
         if(!is_null($where) > 0) {
             $this->view->assign('hasFilter', true);
         } else {
