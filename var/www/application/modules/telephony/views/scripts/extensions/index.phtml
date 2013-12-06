@@ -1,7 +1,7 @@
 <?php echo $this->partial_header; ?>
 
 <form class="ui fluid form segment transition<?php echo !$this->hasFilter ? " hidden" : "" ?>" id="table_filter" method="post">
-    <div class="four fields">
+    <div class="two fields">
         <div class="field">
             <label for="extension_name">Nome</label>
             <input id="extension_name" name="extension_name" value="<?php echo $this->params["extension_name"]?>" placeholder="Nome do ramal" type="text">
@@ -11,14 +11,16 @@
             <label for="extension_number">Número</label>
             <input id="extension_number" name="extension_number" value="<?php echo $this->params["extension_number"]?>" placeholder="Número do ramal" type="text">
         </div>
+    </div>
 
+    <div class="two fields">
         <div class="field">
             <label for="extension_server">Servidor</label>
-            <div class="ui selection fluid  dropdown">
+            <div class="ui selection fluid dropdown">
                 <input type="hidden" name="extension_server" id="extension_server" value="<?php echo (int) $this->params["extension_server"] == 0 ? "selecione" : $this->params["extension_server"] ?>">
                 <div class="text"></div>
                 <i class="dropdown icon"></i>
-                <div class="menu ui transition hidden ">
+                <div class="menu ui transition hidden">
                     <div class="item" data-value="selecione">Selecione</div>
                     <?php foreach($this->servers as $server) { ?>
                     <div class="item" data-value="<?php echo $server['server_id'] ?>"><?php echo $server['server_hostname'] ?></div>

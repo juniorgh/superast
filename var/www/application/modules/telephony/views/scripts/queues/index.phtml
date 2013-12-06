@@ -16,7 +16,7 @@
     <div class="two fields">
         <div class="field">
             <label for="queue_server">Servidor</label>
-            <div class="ui selection  dropdown">
+            <div class="ui selection fluid dropdown">
                 <input type="hidden" name="queue_server" id="queue_server" value="<?php echo (int) $this->params["queue_server"] == 0 ? "selecione" : $this->params["queue_server"] ?>">
                 <div class="text"></div>
                 <i class="dropdown icon"></i>
@@ -31,7 +31,7 @@
 
         <div class="field">
             <label for="queue_company">Empresa</label>
-            <div class="ui selection dropdown">
+            <div class="ui selection fluid dropdown">
                 <input type="hidden" name="queue_company" id="queue_company" value="<?php echo (int) $this->params["queue_company"] == 0 ? "selecione" : $this->params["queue_company"] ?>">
                 <div class="text"></div>
                 <i class="dropdown icon"></i>

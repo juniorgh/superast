@@ -4,7 +4,7 @@
     <?php if(!is_null($this->extension)) { ?>
     <input type="hidden" id="extension_id" name="extension_id" value="<?php echo $this->extension['extension_id'] ?>">
     <?php } ?>
-    <div class="four fields">
+    <div class="two fields">
         <div class="<?php echo $this->disabled ?>field">
             <label for="extension_name">Nome</label>
             <input id="extension_name" name="extension_name" value="<?php echo $this->extension["extension_name"]?>" placeholder="Nome do ramal" type="text"<?php echo $this->disabled ?>>
@@ -14,7 +14,9 @@
             <label for="extension_number">Número</label>
             <input id="extension_number" name="extension_number" value="<?php echo $this->extension["extension_number"]?>" placeholder="Número do ramal" type="text"<?php echo $this->disabled ?>>
         </div>
+    </div>
 
+    <div class="two fields">
         <div class="<?php echo $this->disabled ?>field">
             <label for="extension_server">Servidor</label>
             <div class="ui selection fluid <?php echo $this->disabled ?> dropdown">

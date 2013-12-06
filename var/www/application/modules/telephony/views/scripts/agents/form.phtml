@@ -31,7 +31,7 @@
     <div class="three fields">
         <div class="<?php echo $this->disabled ?>field">
             <label for="agent_server">Servidor</label>
-            <div class="ui selection <?php echo $this->disabled ?> dropdown">
+            <div class="ui selection fluid<?php echo $this->disabled ?> dropdown">
                 <input type="hidden" name="agent_server" id="agent_server" value="<?php echo (int) $this->agent["agent_server"] == 0 ? "selecione" : $this->agent["agent_server"] ?>"<?php echo $this->disabled ?>>
                 <div class="text"></div>
                 <i class="dropdown icon"></i>
@@ -46,7 +46,7 @@
 
         <div class="field">
             <label for="agent_company">Empresa</label>
-            <div class="ui selection dropdown">
+            <div class="ui selection fluid dropdown">
                 <input type="hidden" name="agent_company" id="agent_company" value="<?php echo (int) $this->agent["agent_company"] == 0 ? "selecione" : $this->agent["agent_company"] ?>">
                 <div class="text"></div>
                 <i class="dropdown icon"></i>
@@ -61,7 +61,7 @@
 
         <div class="field">
             <label for="agent_user">Usuário</label>
-            <div class="ui selection dropdown">
+            <div class="ui selection fluid dropdown">
                 <input type="hidden" name="agent_user" id="agent_user" value="<?php echo (int) $this->agent["agent_user"] == 0 ? "selecione" : $this->agent["agent_user"] ?>">
                 <div class="text"></div>
                 <i class="dropdown icon"></i>
