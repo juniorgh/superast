@@ -18,7 +18,7 @@
         <label for="menu_description">Descrição</label>
         <input id="menu_description" name="menu_description" value="<?php echo $this->menu["menu_description"]?>" placeholder="Breve descrição do menu" type="text">
     </div>
-    <div class="four fields">
+    <div class="two fields">
         <div class="field">
             <label for="menu_module">Módulo</label>
             <input id="menu_module" name="menu_module" value="<?php echo $this->menu["menu_module"]?>" placeholder="Nome do módulo do Zend Framework" type="text">
@@ -27,6 +27,8 @@
             <label for="menu_controller">Controladora</label>
             <input id="menu_controller" name="menu_controller" value="<?php echo $this->menu["menu_controller"]?>" placeholder="Nome da controladora do Zend Framework" type="text">
         </div>
+    </div>
+    <div class="two fields">
         <div class="field">
             <label for="menu_action">Ação</label>
             <input id="menu_action" name="menu_action" value="<?php echo $this->menu["menu_action"]?>" placeholder="Nome da ação do Zend Framework" type="text">
@@ -46,31 +48,33 @@
             <input id="menu_icon_class" name="menu_icon_class" value="<?php echo $this->menu["menu_icon_class"]?>" placeholder="Classe do ícone que representa o menu" type="text">
         </div>
     </div>
-    <div class="field">
-        <label for="menu_parent">Menu superior</label>
-        <div class="ui selection dropdown">
-            <input type="hidden" name="menu_parent" id="menu_parent" value="<?php echo isset($this->menu["menu_parent"]) ? $this->menu["menu_parent"] : "selecione" ?>">
-            <div class="text"></div>
-            <i class="dropdown icon"></i>
-            <div class="menu ui transition hidden">
-                <div class="item" data-value="selecione">Selecione</div>
-                <?php foreach($this->menus as $k => $v) { ?> 
-                <div class="item" data-value="<?php echo $k ?>"><?php echo $v ?></div>
-                <?php } ?>
+    <div class="two fields">
+        <div class="field">
+            <label for="menu_parent">Menu superior</label>
+            <div class="ui selection fluid dropdown">
+                <input type="hidden" name="menu_parent" id="menu_parent" value="<?php echo isset($this->menu["menu_parent"]) ? $this->menu["menu_parent"] : "selecione" ?>">
+                <div class="text"></div>
+                <i class="dropdown icon"></i>
+                <div class="menu ui transition hidden">
+                    <div class="item" data-value="selecione">Selecione</div>
+                    <?php foreach($this->menus as $k => $v) { ?> 
+                    <div class="item" data-value="<?php echo $k ?>"><?php echo $v ?></div>
+                    <?php } ?>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="field">
-        <label for="menu_order">Ordem</label>
-        <div class="ui selection dropdown">
-            <input type="hidden" name="menu_order" id="menu_order" value="<?php echo isset($this->menu["menu_order"]) ? $this->menu["menu_order"] : "selecione" ?>">
-            <div class="text"></div>
-            <i class="dropdown icon"></i>
-            <div class="menu ui transition hidden">
-                <div class="item" data-value="selecione">Selecione</div>
-                <?php for($i = 1; $i <= 50; $i++) { ?> 
-                <div class="item" data-value="<?php echo $i ?>"><?php printf('%dº', $i) ?></div>
-                <?php } ?>
+        <div class="field">
+            <label for="menu_order">Ordem</label>
+            <div class="ui selection fluid dropdown">
+                <input type="hidden" name="menu_order" id="menu_order" value="<?php echo isset($this->menu["menu_order"]) ? $this->menu["menu_order"] : "selecione" ?>">
+                <div class="text"></div>
+                <i class="dropdown icon"></i>
+                <div class="menu ui transition hidden">
+                    <div class="item" data-value="selecione">Selecione</div>
+                    <?php for($i = 1; $i <= 50; $i++) { ?> 
+                    <div class="item" data-value="<?php echo $i ?>"><?php printf('%dº', $i) ?></div>
+                    <?php } ?>
+                </div>
             </div>
         </div>
     </div>

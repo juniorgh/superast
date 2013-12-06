@@ -87,6 +87,11 @@ class Default_MenusController extends Zend_Controller_Action {
             $hasFilter =  true;
         }
 
+        if(!empty($params['menu_order']) && $params['menu_order'] != "selecione") {
+            $where[] = "m1.menu_order = {$params['menu_order']}";
+            $hasFilter =  true;
+        }
+
         $query = Default_Model_Menu::readTree(true, $where, $order);
         $paginator = Zend_Paginator::factory($query);
         $paginator->setCurrentPageNumber(parent::_getParam('page', 1));
