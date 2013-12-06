@@ -83,7 +83,7 @@ class Elastix_ImportController extends Zend_Controller_Action {
 
             $response = array('status' => true, 'message' => 'all right!');
         } catch (Exception $e) {
-            $response = array('status' => false, 'message' => $e->getTraceAsString(), 'server' => $server );
+            $response = array('status' => false, 'message' => $e->getTraceAsString(), 'server' => $server);
         }
 
         $this->getResponse()->setHeader('Content-Type', 'application/json')->setBody(Zend_Json::encode($response));
@@ -134,10 +134,15 @@ class Elastix_ImportController extends Zend_Controller_Action {
     /** 
      * Realiza a importação das campanhas ativas e receptivas do módulo Call
      * Center do Elastix.
+     * @todo        As campanhas só poderão ser importadas após a integração da tabela CDR e o Asterisk.
      * @return void
      */
     public function campaignsAction() {
-        $response = array('status' => true, 'message' => 'all right!');
+        try {
+            $response = array('status' => true, 'message' => 'all right!');
+        } catch (Exception $e) {
+            $response = array('status' => false, 'message' => $e->getTraceAsString(), 'server' => $server);
+        }
         $this->getResponse()->setHeader('Content-Type', 'application/json')->setBody(Zend_Json::encode($response));
     }
 
@@ -182,7 +187,7 @@ class Elastix_ImportController extends Zend_Controller_Action {
 
             $response = array('status' => true, 'message' => 'Importação ok!');
         } catch (Exception $e) {
-            $response = array('status' => false, 'message' => $e->getTraceAsString(), 'server' => $server );
+            $response = array('status' => false, 'message' => $e->getTraceAsString(), 'server' => $server);
         }
 
         $this->getResponse()->setHeader('Content-Type', 'application/json')->setBody(Zend_Json::encode($response));
